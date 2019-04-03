@@ -16,10 +16,10 @@
 package com.fahrizal.cekongkir.sample.test.presenter;
 
 import android.content.Context;
-import com.fahrizal.cekongkir.domain.interactor.GetUserList;
-import com.fahrizal.cekongkir.presentation.mapper.UserModelDataMapper;
+import com.fahrizal.cekongkir.domain.interactor.GetProvinceList;
+import com.fahrizal.cekongkir.presentation.mapper.ProvinceModelDataMapper;
 import com.fahrizal.cekongkir.presentation.presenter.ProvinceListPresenter;
-import com.fahrizal.cekongkir.presentation.view.UserListView;
+import com.fahrizal.cekongkir.presentation.view.ProvinceListView;
 import io.reactivex.observers.DisposableObserver;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,25 +37,25 @@ public class ProvinceListPresenterTest {
   private ProvinceListPresenter provinceListPresenter;
 
   @Mock private Context mockContext;
-  @Mock private UserListView mockUserListView;
-  @Mock private GetUserList mockGetUserList;
-  @Mock private UserModelDataMapper mockUserModelDataMapper;
+  @Mock private ProvinceListView mockProvinceListView;
+  @Mock private GetProvinceList mockGetProvinceList;
+  @Mock private ProvinceModelDataMapper mockProvinceModelDataMapper;
 
   @Before
   public void setUp() {
-    provinceListPresenter = new ProvinceListPresenter(mockGetUserList, mockUserModelDataMapper);
-    provinceListPresenter.setView(mockUserListView);
+    provinceListPresenter = new ProvinceListPresenter(mockGetProvinceList, mockProvinceModelDataMapper);
+    provinceListPresenter.setView(mockProvinceListView);
   }
 
   @Test
   @SuppressWarnings("unchecked")
   public void testUserListPresenterInitialize() {
-    given(mockUserListView.context()).willReturn(mockContext);
+    given(mockProvinceListView.context()).willReturn(mockContext);
 
     provinceListPresenter.initialize();
 
-    verify(mockUserListView).hideRetry();
-    verify(mockUserListView).showLoading();
-    verify(mockGetUserList).execute(any(DisposableObserver.class), any(Void.class));
+    verify(mockProvinceListView).hideRetry();
+    verify(mockProvinceListView).showLoading();
+    verify(mockGetProvinceList).execute(any(DisposableObserver.class), any(Void.class));
   }
 }

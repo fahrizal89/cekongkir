@@ -16,13 +16,16 @@
 package com.fahrizal.cekongkir.presentation.di.modules;
 
 import android.content.Context;
-import com.fahrizal.cekongkir.data.cache.UserCache;
-import com.fahrizal.cekongkir.data.cache.UserCacheImpl;
+
+import com.fahrizal.cekongkir.data.cache.ProvinceCache;
+import com.fahrizal.cekongkir.data.cache.ProvinceCacheImpl;
+import com.fahrizal.cekongkir.data.datasource.RetrofitDataStore;
 import com.fahrizal.cekongkir.data.executor.JobExecutor;
-import com.fahrizal.cekongkir.data.UserDataRepository;
+import com.fahrizal.cekongkir.data.ProvinceDataRepository;
+import com.fahrizal.cekongkir.data.net.ApiService;
 import com.fahrizal.cekongkir.domain.executor.PostExecutionThread;
 import com.fahrizal.cekongkir.domain.executor.ThreadExecutor;
-import com.fahrizal.cekongkir.domain.repository.UserRepository;
+import com.fahrizal.cekongkir.domain.repository.ProvinceRepository;
 import com.fahrizal.cekongkir.presentation.AndroidApplication;
 import com.fahrizal.cekongkir.presentation.UIThread;
 
@@ -53,11 +56,15 @@ public class ApplicationModule {
     return uiThread;
   }
 
-  @Provides @Singleton UserCache provideUserCache(UserCacheImpl userCache) {
+  @Provides @Singleton
+  ProvinceCache provideUserCache(ProvinceCacheImpl userCache) {
     return userCache;
   }
 
-  @Provides @Singleton UserRepository provideUserRepository(UserDataRepository userDataRepository) {
+  @Provides @Singleton
+  ProvinceRepository provideUserRepository(ProvinceDataRepository userDataRepository) {
     return userDataRepository;
   }
+  @Provides @Singleton
+  ApiService provideApiService(){return new RetrofitDataStore().getApiService();}
 }

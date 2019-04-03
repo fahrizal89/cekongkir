@@ -12,22 +12,23 @@
   <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/url"
+      android:layout_marginTop="100dp"
+      android:text="@string/app_name"
       android:gravity="center"
       />
 
-  <ImageView
+  <Button
+      android:id="@+id/btn_Ongkir"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:src="@drawable/logo"
-      android:contentDescription="@string/string_content_description"
+      android:text="@string/btn_text_open_ongkir"
       />
 
   <Button
-      android:id="@+id/btn_LoadData"
+      android:id="@+id/btn_AreaCovered"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/btn_text_load_data"
+      android:text="@string/btn_text_covered_area"
       />
 
 </LinearLayout>

@@ -15,7 +15,7 @@
  */
 package com.fahrizal.cekongkir.data.cache.serializer;
 
-import com.fahrizal.cekongkir.data.entity.UserEntity;
+import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,21 +46,21 @@ public class SerializerTest {
 
   @Test
   public void testSerializeHappyCase() {
-    final UserEntity userEntityOne = serializer.deserialize(JSON_RESPONSE, UserEntity.class);
-    final String jsonString = serializer.serialize(userEntityOne, UserEntity.class);
-    final UserEntity userEntityTwo = serializer.deserialize(jsonString, UserEntity.class);
+    final ProvinceEntity provinceEntityOne = serializer.deserialize(JSON_RESPONSE, ProvinceEntity.class);
+    final String jsonString = serializer.serialize(provinceEntityOne, ProvinceEntity.class);
+    final ProvinceEntity provinceEntityTwo = serializer.deserialize(jsonString, ProvinceEntity.class);
 
-    assertThat(userEntityOne.getUserId(), is(userEntityTwo.getUserId()));
-    assertThat(userEntityOne.getFullname(), is(equalTo(userEntityTwo.getFullname())));
-    assertThat(userEntityOne.getFollowers(), is(userEntityTwo.getFollowers()));
+    assertThat(provinceEntityOne.getUserId(), is(provinceEntityTwo.getUserId()));
+    assertThat(provinceEntityOne.getFullname(), is(equalTo(provinceEntityTwo.getFullname())));
+    assertThat(provinceEntityOne.getFollowers(), is(provinceEntityTwo.getFollowers()));
   }
 
   @Test
   public void testDesearializeHappyCase() {
-    final UserEntity userEntity = serializer.deserialize(JSON_RESPONSE, UserEntity.class);
+    final ProvinceEntity provinceEntity = serializer.deserialize(JSON_RESPONSE, ProvinceEntity.class);
 
-    assertThat(userEntity.getUserId(), is(1));
-    assertThat(userEntity.getFullname(), is("Simon Hill"));
-    assertThat(userEntity.getFollowers(), is(7484));
+    assertThat(provinceEntity.getUserId(), is(1));
+    assertThat(provinceEntity.getFullname(), is("Simon Hill"));
+    assertThat(provinceEntity.getFollowers(), is(7484));
   }
 }

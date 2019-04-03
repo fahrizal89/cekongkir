@@ -3,7 +3,7 @@ package com.fahrizal.cekongkir.presentation.navigation;
 import android.content.Context;
 import android.content.Intent;
 
-import com.fahrizal.cekongkir.presentation.view.activity.ProvinceListActivity;
+import com.fahrizal.cekongkir.presentation.view.activity.CoveredAreaListActivity;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -25,7 +25,7 @@ public class Navigator {
    */
   public void navigateToProvinceList(Context context) {
     if (context != null) {
-      Intent intentToLaunch = ProvinceListActivity.getCallingIntent(context);
+      Intent intentToLaunch = CoveredAreaListActivity.getCallingIntent(context);
       context.startActivity(intentToLaunch);
     }
   }

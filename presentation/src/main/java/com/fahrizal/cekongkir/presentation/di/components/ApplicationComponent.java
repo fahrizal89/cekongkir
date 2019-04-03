@@ -18,7 +18,7 @@ package com.fahrizal.cekongkir.presentation.di.components;
 import android.content.Context;
 import com.fahrizal.cekongkir.domain.executor.PostExecutionThread;
 import com.fahrizal.cekongkir.domain.executor.ThreadExecutor;
-import com.fahrizal.cekongkir.domain.repository.UserRepository;
+import com.fahrizal.cekongkir.domain.repository.ProvinceRepository;
 import com.fahrizal.cekongkir.presentation.di.modules.ApplicationModule;
 import com.fahrizal.cekongkir.presentation.view.activity.BaseActivity;
 import dagger.Component;
@@ -36,5 +36,5 @@ public interface ApplicationComponent {
   Context context();
   ThreadExecutor threadExecutor();
   PostExecutionThread postExecutionThread();
-  UserRepository userRepository();
+  ProvinceRepository userRepository();
 }

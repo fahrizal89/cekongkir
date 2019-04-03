@@ -15,32 +15,32 @@
  */
 package com.fahrizal.cekongkir.domain.interactor;
 
-import com.fahrizal.cekongkir.domain.User;
+import com.fahrizal.cekongkir.domain.Province;
 import com.fahrizal.cekongkir.domain.executor.PostExecutionThread;
 import com.fahrizal.cekongkir.domain.executor.ThreadExecutor;
-import com.fahrizal.cekongkir.domain.repository.UserRepository;
+import com.fahrizal.cekongkir.domain.repository.ProvinceRepository;
 import com.fernandocejas.arrow.checks.Preconditions;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 
 /**
  * This class is an implementation of {@link UseCase} that represents a use case for
- * retrieving data related to an specific {@link User}.
+ * retrieving data related to an specific {@link Province}.
  */
-public class GetUserDetails extends UseCase<User, GetUserDetails.Params> {
+public class GetUserDetails extends UseCase<Province, GetUserDetails.Params> {
 
-  private final UserRepository userRepository;
+  private final ProvinceRepository provinceRepository;
 
   @Inject
-  GetUserDetails(UserRepository userRepository, ThreadExecutor threadExecutor,
-      PostExecutionThread postExecutionThread) {
+  GetUserDetails(ProvinceRepository provinceRepository, ThreadExecutor threadExecutor,
+                 PostExecutionThread postExecutionThread) {
     super(threadExecutor, postExecutionThread);
-    this.userRepository = userRepository;
+    this.provinceRepository = provinceRepository;
   }
 
-  @Override Observable<User> buildUseCaseObservable(Params params) {
+  @Override Observable<Province> buildUseCaseObservable(Params params) {
     Preconditions.checkNotNull(params);
-    return this.userRepository.user(params.userId);
+    return this.provinceRepository.user(params.userId);
   }
 
   public static final class Params {

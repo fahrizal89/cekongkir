@@ -14,7 +14,7 @@ import butterknife.OnClick;
  */
 public class MainActivity extends BaseActivity {
 
-  @Bind(R.id.btn_LoadData) Button btn_LoadData;
+  @Bind(R.id.btn_AreaCovered) Button btn_LoadData;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity {
   /**
    * Goes to the province list screen.
    */
-  @OnClick(R.id.btn_LoadData)
+  @OnClick(R.id.btn_AreaCovered)
   void navigateToUserList() {
     this.navigator.navigateToProvinceList(this);
   }

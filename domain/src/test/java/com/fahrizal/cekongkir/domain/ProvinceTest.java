@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fahrizal.cekongkir.data.exception;
+package com.fahrizal.cekongkir.domain;
 
-/**
- * Exception throw by the application when a Province search can't return a valid result.
- */
-public class UserNotFoundException extends Exception {
-  public UserNotFoundException() {
-    super();
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class ProvinceTest {
+
+  private static final int FAKE_USER_ID = 8;
+
+  private Province province;
+
+  @Before
+  public void setUp() {
+    province = new Province(FAKE_USER_ID);
+  }
+
+  @Test
+  public void testUserConstructorHappyCase() {
+    final int userId = province.getUserId();
+
+    assertThat(userId).isEqualTo(FAKE_USER_ID);
   }
 }

@@ -15,10 +15,12 @@
  */
 package com.fahrizal.cekongkir.data.exception;
 
+import io.reactivex.functions.Consumer;
+
 /**
  * Exception throw by the application when a there is a network connection exception.
  */
-public class NetworkConnectionException extends Exception {
+public class NetworkConnectionException extends Exception implements Consumer<Throwable> {
 
   public NetworkConnectionException() {
     super();
@@ -26,5 +28,10 @@ public class NetworkConnectionException extends Exception {
 
   public NetworkConnectionException(final Throwable cause) {
     super(cause);
+  }
+
+  @Override
+  public void accept(Throwable throwable) throws Exception {
+
   }
 }

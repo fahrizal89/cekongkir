@@ -1,22 +1,10 @@
-/**
- * Copyright (C) 2015 Fernando Cejas Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.fahrizal.cekongkir.data.net;
 
-import com.fahrizal.cekongkir.data.entity.UserEntity;
+import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
 import io.reactivex.Observable;
+import retrofit2.Call;
+import retrofit2.http.GET;
+
 import java.util.List;
 
 /**
@@ -24,22 +12,23 @@ import java.util.List;
  */
 public interface RestApi {
   String API_BASE_URL =
-      "https://raw.githubusercontent.com/cekongkir/Sample-Data/master/Android-CleanArchitecture/";
+      "https://api.rajaongkir.com/starter/";
 
-  /** Api url for getting all users */
-  String API_URL_GET_USER_LIST = API_BASE_URL + "users.json";
-  /** Api url for getting a user profile: Remember to concatenate id + 'json' */
-  String API_URL_GET_USER_DETAILS = API_BASE_URL + "user_";
+  /** Api url for getting all data */
+  String API_URL_GET_PROVINCE_LIST = API_BASE_URL + "provinces";
+  String API_URL_GET_CITY_LIST = API_BASE_URL + "city";
+  String API_KEY = "32b3276fbccf085a17b6a1fc86b12ba3";
 
   /**
-   * Retrieves an {@link Observable} which will emit a List of {@link UserEntity}.
+   * Retrieves an {@link Observable} which will emit a List of {@link ProvinceEntity}.
    */
-  Observable<List<UserEntity>> userEntityList();
+  Observable<List<ProvinceEntity>> provinceEntityList();
 
   /**
-   * Retrieves an {@link Observable} which will emit a {@link UserEntity}.
+   * Retrieves an {@link Observable} which will emit a {@link ProvinceEntity}.
    *
    * @param userId The user id used to get user data.
    */
-  Observable<UserEntity> userEntityById(final int userId);
+  Observable<ProvinceEntity> userEntityById(final int userId);
+
 }

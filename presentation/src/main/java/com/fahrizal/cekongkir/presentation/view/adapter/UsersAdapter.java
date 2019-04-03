@@ -1,7 +1,3 @@
-/**
- * Copyright (C) 2014 cekongkir.org. All rights reserved.
- * @author Fernando Cejas (the cekongkir coder)
- */
 package com.fahrizal.cekongkir.presentation.view.adapter;
 
 import android.content.Context;
@@ -14,22 +10,23 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import com.fahrizal.cekongkir.presentation.R;
-import com.fahrizal.cekongkir.presentation.model.UserModel;
+import com.fahrizal.cekongkir.presentation.model.ProvinceModel;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Adaptar that manages a collection of {@link UserModel}.
+ * Adaptar that manages a collection of {@link ProvinceModel}.
  */
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
 
   public interface OnItemClickListener {
-    void onUserItemClicked(UserModel userModel);
+    void onUserItemClicked(ProvinceModel provinceModel);
   }
 
-  private List<UserModel> usersCollection;
+  private List<ProvinceModel> provincesCollection;
   private final LayoutInflater layoutInflater;
 
   private OnItemClickListener onItemClickListener;
@@ -38,21 +35,21 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
   UsersAdapter(Context context) {
     this.layoutInflater =
         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    this.usersCollection = Collections.emptyList();
+    this.provincesCollection = Collections.emptyList();
   }
 
   @Override public int getItemCount() {
-    return (this.usersCollection != null) ? this.usersCollection.size() : 0;
+    return (this.provincesCollection != null) ? this.provincesCollection.size() : 0;
   }
 
   @Override public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    final View view = this.layoutInflater.inflate(R.layout.row_user, parent, false);
+    final View view = this.layoutInflater.inflate(R.layout.row_provice, parent, false);
     return new UserViewHolder(view);
   }
 
   @Override public void onBindViewHolder(UserViewHolder holder, final int position) {
-    final UserModel userModel = this.usersCollection.get(position);
-    holder.textViewTitle.setText(userModel.getFullName());
+    final ProvinceModel userModel = this.provincesCollection.get(position);
+    holder.textViewTitle.setText(userModel.getName());
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         if (UsersAdapter.this.onItemClickListener != null) {
@@ -66,9 +63,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     return position;
   }
 
-  public void setUsersCollection(Collection<UserModel> usersCollection) {
-    this.validateUsersCollection(usersCollection);
-    this.usersCollection = (List<UserModel>) usersCollection;
+  public void setProvincesCollection(Collection<ProvinceModel> provincesCollection) {
+    this.validateUsersCollection(provincesCollection);
+    this.provincesCollection = (List<ProvinceModel>) provincesCollection;
     this.notifyDataSetChanged();
   }
 
@@ -76,8 +73,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     this.onItemClickListener = onItemClickListener;
   }
 
-  private void validateUsersCollection(Collection<UserModel> usersCollection) {
-    if (usersCollection == null) {
+  private void validateUsersCollection(Collection<ProvinceModel> provincesCollection) {
+    if (provincesCollection == null) {
       throw new IllegalArgumentException("The list cannot be null");
     }
   }

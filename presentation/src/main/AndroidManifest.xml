@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.fahrizal.cekongkir.presentation.view.activity.ProvinceListActivity"
+            android:name="com.fahrizal.cekongkir.presentation.view.activity.CoveredAreaListActivity"
             android:label="@string/activity_title_user_list"></activity>
     </application>
 

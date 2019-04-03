@@ -18,10 +18,14 @@ package com.fahrizal.cekongkir.data.net;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import com.fahrizal.cekongkir.data.entity.UserEntity;
-import com.fahrizal.cekongkir.data.entity.mapper.UserEntityJsonMapper;
+
+import com.fahrizal.cekongkir.data.entity.BaseResponse;
+import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
+import com.fahrizal.cekongkir.data.entity.mapper.ProvinceEntityJsonMapper;
 import com.fahrizal.cekongkir.data.exception.NetworkConnectionException;
 import io.reactivex.Observable;
+import io.reactivex.disposables.CompositeDisposable;
+
 import java.net.MalformedURLException;
 import java.util.List;
 
@@ -31,30 +35,34 @@ import java.util.List;
 public class RestApiImpl implements RestApi {
 
   private final Context context;
-  private final UserEntityJsonMapper userEntityJsonMapper;
+  private final ProvinceEntityJsonMapper provinceEntityJsonMapper;
+  ApiService apiService;
+  CompositeDisposable compositeDisposable = new CompositeDisposable();
 
   /**
    * Constructor of the class
    *
    * @param context {@link android.content.Context}.
-   * @param userEntityJsonMapper {@link UserEntityJsonMapper}.
+   * @param provinceEntityJsonMapper {@link ProvinceEntityJsonMapper}.
    */
-  public RestApiImpl(Context context, UserEntityJsonMapper userEntityJsonMapper) {
-    if (context == null || userEntityJsonMapper == null) {
+  public RestApiImpl(Context context, ProvinceEntityJsonMapper provinceEntityJsonMapper,ApiService apiService) {
+    if (context == null || provinceEntityJsonMapper == null) {
       throw new IllegalArgumentException("The constructor parameters cannot be null!!!");
     }
     this.context = context.getApplicationContext();
-    this.userEntityJsonMapper = userEntityJsonMapper;
+    this.provinceEntityJsonMapper = provinceEntityJsonMapper;
+    this.apiService=apiService;
   }
 
-  @Override public Observable<List<UserEntity>> userEntityList() {
+
+
+  @Override public Observable<List<ProvinceEntity>> provinceEntityList() {
     return Observable.create(emitter -> {
       if (isThereInternetConnection()) {
         try {
-          String responseUserEntities = getUserEntitiesFromApi();
-          if (responseUserEntities != null) {
-            emitter.onNext(userEntityJsonMapper.transformUserEntityCollection(
-                responseUserEntities));
+          BaseResponse response=apiService.getProvincesAll(RestApi.API_KEY).execute().body();
+          if (response != null) {
+            emitter.onNext(response.getRajaOngkir().getResults());
             emitter.onComplete();
           } else {
             emitter.onError(new NetworkConnectionException());
@@ -68,13 +76,13 @@ public class RestApiImpl implements RestApi {
     });
   }
 
-  @Override public Observable<UserEntity> userEntityById(final int userId) {
+  @Override public Observable<ProvinceEntity> userEntityById(final int userId) {
     return Observable.create(emitter -> {
       if (isThereInternetConnection()) {
         try {
           String responseUserDetails = getUserDetailsFromApi(userId);
           if (responseUserDetails != null) {
-            emitter.onNext(userEntityJsonMapper.transformUserEntity(responseUserDetails));
+            emitter.onNext(provinceEntityJsonMapper.transformUserEntity(responseUserDetails));
             emitter.onComplete();
           } else {
             emitter.onError(new NetworkConnectionException());
@@ -89,11 +97,11 @@ public class RestApiImpl implements RestApi {
   }
 
   private String getUserEntitiesFromApi() throws MalformedURLException {
-    return ApiConnection.createGET(API_URL_GET_USER_LIST).requestSyncCall();
+    return ApiConnection.createGET(API_URL_GET_PROVINCE_LIST).requestSyncCall();
   }
 
   private String getUserDetailsFromApi(int userId) throws MalformedURLException {
-    String apiUrl = API_URL_GET_USER_DETAILS + userId + ".json";
+    String apiUrl = API_URL_GET_CITY_LIST + userId + ".json";
     return ApiConnection.createGET(apiUrl).requestSyncCall();
   }
 

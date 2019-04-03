@@ -1,16 +1,17 @@
 package com.fahrizal.cekongkir.presentation.presenter;
 
 import android.support.annotation.NonNull;
-import com.fahrizal.cekongkir.domain.User;
+
+import com.fahrizal.cekongkir.domain.Province;
 import com.fahrizal.cekongkir.domain.exception.DefaultErrorBundle;
 import com.fahrizal.cekongkir.domain.exception.ErrorBundle;
 import com.fahrizal.cekongkir.domain.interactor.DefaultObserver;
-import com.fahrizal.cekongkir.domain.interactor.GetUserList;
+import com.fahrizal.cekongkir.domain.interactor.GetProvinceList;
 import com.fahrizal.cekongkir.presentation.exception.ErrorMessageFactory;
 import com.fahrizal.cekongkir.presentation.di.PerActivity;
-import com.fahrizal.cekongkir.presentation.mapper.UserModelDataMapper;
-import com.fahrizal.cekongkir.presentation.model.UserModel;
-import com.fahrizal.cekongkir.presentation.view.UserListView;
+import com.fahrizal.cekongkir.presentation.mapper.ProvinceModelDataMapper;
+import com.fahrizal.cekongkir.presentation.model.ProvinceModel;
+import com.fahrizal.cekongkir.presentation.view.ProvinceListView;
 import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
@@ -22,19 +23,19 @@ import javax.inject.Inject;
 @PerActivity
 public class ProvinceListPresenter implements Presenter {
 
-  private UserListView viewListView;
+  private ProvinceListView viewListView;
 
-  private final GetUserList getUserListUseCase;
-  private final UserModelDataMapper userModelDataMapper;
+  private final GetProvinceList getProvinceListUseCase;
+  private final ProvinceModelDataMapper provinceModelDataMapper;
 
   @Inject
-  public ProvinceListPresenter(GetUserList getUserListUserCase,
-                               UserModelDataMapper userModelDataMapper) {
-    this.getUserListUseCase = getUserListUserCase;
-    this.userModelDataMapper = userModelDataMapper;
+  public ProvinceListPresenter(GetProvinceList getUserListProvinceCase,
+                               ProvinceModelDataMapper provinceModelDataMapper) {
+    this.getProvinceListUseCase = getUserListProvinceCase;
+    this.provinceModelDataMapper = provinceModelDataMapper;
   }
 
-  public void setView(@NonNull UserListView view) {
+  public void setView(@NonNull ProvinceListView view) {
     this.viewListView = view;
   }
 
@@ -43,7 +44,7 @@ public class ProvinceListPresenter implements Presenter {
   @Override public void pause() {}
 
   @Override public void destroy() {
-    this.getUserListUseCase.dispose();
+    this.getProvinceListUseCase.dispose();
     this.viewListView = null;
   }
 
@@ -55,16 +56,16 @@ public class ProvinceListPresenter implements Presenter {
   }
 
   /**
-   * Loads all users.
+   * Loads all provinces.
    */
   private void loadUserList() {
     this.hideViewRetry();
     this.showViewLoading();
-    this.getUserList();
+    this.getProvinceList();
   }
 
-  public void onUserClicked(UserModel userModel) {
-    this.viewListView.viewUser(userModel);
+  public void onUserClicked(ProvinceModel provinceModel) {
+    this.viewListView.viewUser(provinceModel);
   }
 
   private void showViewLoading() {
@@ -89,17 +90,17 @@ public class ProvinceListPresenter implements Presenter {
     this.viewListView.showError(errorMessage);
   }
 
-  private void showUsersCollectionInView(Collection<User> usersCollection) {
-    final Collection<UserModel> userModelsCollection =
-        this.userModelDataMapper.transform(usersCollection);
-    this.viewListView.renderUserList(userModelsCollection);
+  private void showUsersCollectionInView(Collection<Province> usersCollection) {
+    final Collection<ProvinceModel> provinceModelsCollection =
+        this.provinceModelDataMapper.transform(usersCollection);
+    this.viewListView.renderUserList(provinceModelsCollection);
   }
 
-  private void getUserList() {
-    this.getUserListUseCase.execute(new UserListObserver(), null);
+  private void getProvinceList() {
+    this.getProvinceListUseCase.execute(new UserListObserver(), null);
   }
 
-  private final class UserListObserver extends DefaultObserver<List<User>> {
+  private final class UserListObserver extends DefaultObserver<List<Province>> {
 
     @Override public void onComplete() {
       ProvinceListPresenter.this.hideViewLoading();
@@ -111,8 +112,8 @@ public class ProvinceListPresenter implements Presenter {
       ProvinceListPresenter.this.showViewRetry();
     }
 
-    @Override public void onNext(List<User> users) {
-      ProvinceListPresenter.this.showUsersCollectionInView(users);
+    @Override public void onNext(List<Province> provinces) {
+      ProvinceListPresenter.this.showUsersCollectionInView(provinces);
     }
   }
 }
