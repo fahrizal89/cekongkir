@@ -65,8 +65,8 @@ dependencies {
   testCompile testDependencies.mockito
   testCompile testDependencies.robolectric
 
-  compile 'com.squareup.retrofit2:retrofit:2.5.0'
-  compile 'com.google.code.gson:gson:2.6.2'
-  compile 'com.squareup.retrofit2:converter-gson:2.5.0'
-  compile 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+  compile dataDependencies.retrofit
+  compile dataDependencies.retrofitConverter
+  compile dataDependencies.gson
+  compile dataDependencies.retrofitAdapter
 }

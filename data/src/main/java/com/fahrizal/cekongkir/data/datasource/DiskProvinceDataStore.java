@@ -22,7 +22,6 @@ class DiskProvinceDataStore implements ProvinceDataStore {
   }
 
   @Override public Observable<List<ProvinceEntity>> userEntityList() {
-    //TODO: implement simple cache for storing/retrieving collections of provinces.
     throw new UnsupportedOperationException("Operation is not available!!!");
   }
 

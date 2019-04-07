@@ -20,9 +20,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.fahrizal.cekongkir.data.entity.BaseResponse;
+import com.fahrizal.cekongkir.data.entity.CostEntity;
+import com.fahrizal.cekongkir.data.entity.CostResponse;
 import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
 import com.fahrizal.cekongkir.data.entity.mapper.ProvinceEntityJsonMapper;
 import com.fahrizal.cekongkir.data.exception.NetworkConnectionException;
+import com.fahrizal.cekongkir.data.model.CostRequest;
+
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -120,4 +124,27 @@ public class RestApiImpl implements RestApi {
 
     return isConnected;
   }
+
+  @Override
+  public Observable<List<CostEntity.CostServiceEntity>> getCostDetailList(CostRequest costRequest) {
+    return Observable.create(emitter -> {
+      if (isThereInternetConnection()) {
+        try {
+          CostResponse response=apiService.getCost(RestApi.API_KEY,costRequest).execute().body();
+          if (response != null) {
+            List<CostEntity.CostServiceEntity> costs= response.getRajaOngkir().getResults().get(0).getCosts();
+            emitter.onNext(costs);
+            emitter.onComplete();
+          } else {
+            emitter.onError(new NetworkConnectionException());
+          }
+        } catch (Exception e) {
+          emitter.onError(new NetworkConnectionException(e.getCause()));
+        }
+      } else {
+        emitter.onError(new NetworkConnectionException());
+      }
+    });
+  }
+
 }

@@ -36,8 +36,8 @@ public class CoveredAreaListFragment extends BaseFragment implements ProvinceLis
   }
 
   @Inject
-  ProvinceListPresenter provinceListPresenter;
-  @Inject UsersAdapter usersAdapter;
+  ProvinceListPresenter mPresenter;
+  @Inject UsersAdapter adapter;
 
   @Bind(R.id.rv_covered_areas) RecyclerView rv_users;
   @Bind(R.id.rl_progress) RelativeLayout rl_progress;
@@ -72,7 +72,7 @@ public class CoveredAreaListFragment extends BaseFragment implements ProvinceLis
 
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    this.provinceListPresenter.setView(this);
+    this.mPresenter.setView(this);
     if (savedInstanceState == null) {
       this.loadUserList();
     }
@@ -80,12 +80,12 @@ public class CoveredAreaListFragment extends BaseFragment implements ProvinceLis
 
   @Override public void onResume() {
     super.onResume();
-    this.provinceListPresenter.resume();
+    this.mPresenter.resume();
   }
 
   @Override public void onPause() {
     super.onPause();
-    this.provinceListPresenter.pause();
+    this.mPresenter.pause();
   }
 
   @Override public void onDestroyView() {
@@ -96,7 +96,7 @@ public class CoveredAreaListFragment extends BaseFragment implements ProvinceLis
 
   @Override public void onDestroy() {
     super.onDestroy();
-    this.provinceListPresenter.destroy();
+    this.mPresenter.destroy();
   }
 
   @Override public void onDetach() {
@@ -124,7 +124,7 @@ public class CoveredAreaListFragment extends BaseFragment implements ProvinceLis
 
   @Override public void renderUserList(Collection<ProvinceModel> provinceModelCollection) {
     if (provinceModelCollection != null) {
-      this.usersAdapter.setProvincesCollection(provinceModelCollection);
+      this.adapter.setProvincesCollection(provinceModelCollection);
     }
   }
 
@@ -143,16 +143,16 @@ public class CoveredAreaListFragment extends BaseFragment implements ProvinceLis
   }
 
   private void setupRecyclerView() {
-    this.usersAdapter.setOnItemClickListener(onItemClickListener);
+    this.adapter.setOnItemClickListener(onItemClickListener);
     this.rv_users.setLayoutManager(new UsersLayoutManager(context()));
-    this.rv_users.setAdapter(usersAdapter);
+    this.rv_users.setAdapter(adapter);
   }
 
   /**
    * Loads all provinces.
    */
   private void loadUserList() {
-    this.provinceListPresenter.initialize();
+    this.mPresenter.initialize();
   }
 
   @OnClick(R.id.bt_retry) void onButtonRetryClick() {
@@ -162,8 +162,8 @@ public class CoveredAreaListFragment extends BaseFragment implements ProvinceLis
   private UsersAdapter.OnItemClickListener onItemClickListener =
       new UsersAdapter.OnItemClickListener() {
         @Override public void onUserItemClicked(ProvinceModel provinceModel) {
-          if (CoveredAreaListFragment.this.provinceListPresenter != null && provinceModel != null) {
-            CoveredAreaListFragment.this.provinceListPresenter.onUserClicked(provinceModel);
+          if (CoveredAreaListFragment.this.mPresenter != null && provinceModel != null) {
+            CoveredAreaListFragment.this.mPresenter.onUserClicked(provinceModel);
           }
         }
       };

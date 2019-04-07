@@ -18,14 +18,14 @@
       />
 
   <Button
-      android:id="@+id/btn_Ongkir"
+      android:id="@+id/btnCostChecking"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/btn_text_open_ongkir"
       />
 
   <Button
-      android:id="@+id/btn_AreaCovered"
+      android:id="@+id/btnAreaCovered"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/btn_text_covered_area"

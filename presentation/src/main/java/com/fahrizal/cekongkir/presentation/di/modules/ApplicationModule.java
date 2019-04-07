@@ -17,6 +17,9 @@ package com.fahrizal.cekongkir.presentation.di.modules;
 
 import android.content.Context;
 
+import com.fahrizal.cekongkir.data.CostDataRepository;
+import com.fahrizal.cekongkir.data.cache.CostCache;
+import com.fahrizal.cekongkir.data.cache.CostCacheImpl;
 import com.fahrizal.cekongkir.data.cache.ProvinceCache;
 import com.fahrizal.cekongkir.data.cache.ProvinceCacheImpl;
 import com.fahrizal.cekongkir.data.datasource.RetrofitDataStore;
@@ -25,6 +28,7 @@ import com.fahrizal.cekongkir.data.ProvinceDataRepository;
 import com.fahrizal.cekongkir.data.net.ApiService;
 import com.fahrizal.cekongkir.domain.executor.PostExecutionThread;
 import com.fahrizal.cekongkir.domain.executor.ThreadExecutor;
+import com.fahrizal.cekongkir.domain.repository.CostRepository;
 import com.fahrizal.cekongkir.domain.repository.ProvinceRepository;
 import com.fahrizal.cekongkir.presentation.AndroidApplication;
 import com.fahrizal.cekongkir.presentation.UIThread;
@@ -67,4 +71,15 @@ public class ApplicationModule {
   }
   @Provides @Singleton
   ApiService provideApiService(){return new RetrofitDataStore().getApiService();}
+
+  @Provides @Singleton
+  CostRepository provideCostRepository(CostDataRepository costRepository) {
+    return costRepository;
+  }
+
+  @Provides @Singleton
+  CostCache provideCostCache(CostCacheImpl costCache) {
+    return costCache;
+  }
+
 }

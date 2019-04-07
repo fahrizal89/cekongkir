@@ -39,7 +39,7 @@ public class ProvinceDetailsPresenterTest {
   public void testUserDetailsPresenterInitialize() {
     given(mockUserDetailsView.context()).willReturn(mockContext);
 
-    userDetailsPresenter.initialize(USER_ID);
+    userDetailsPresenter.doCheckingCost(USER_ID);
 
     verify(mockUserDetailsView).hideRetry();
     verify(mockUserDetailsView).showLoading();

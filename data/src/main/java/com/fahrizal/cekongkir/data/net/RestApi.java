@@ -1,9 +1,10 @@
 package com.fahrizal.cekongkir.data.net;
 
+import com.fahrizal.cekongkir.data.entity.CostEntity;
 import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
+import com.fahrizal.cekongkir.data.model.CostRequest;
+
 import io.reactivex.Observable;
-import retrofit2.Call;
-import retrofit2.http.GET;
 
 import java.util.List;
 
@@ -30,5 +31,7 @@ public interface RestApi {
    * @param userId The user id used to get user data.
    */
   Observable<ProvinceEntity> userEntityById(final int userId);
+
+  Observable<List<CostEntity.CostServiceEntity>> getCostDetailList(CostRequest costRequest);
 
 }

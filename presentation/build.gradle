@@ -67,7 +67,6 @@ dependencies {
     compile project(':data')
 
     compile 'com.android.support:appcompat-v7:21.0.3'
-
     apt presentationDependencies.daggerCompiler
     compile presentationDependencies.dagger
     compile presentationDependencies.butterKnife
@@ -85,7 +84,7 @@ dependencies {
     //Development
     compile developmentDependencies.leakCanary
 
-    compile 'com.squareup.retrofit2:retrofit:2.5.0'
-    compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.5.0'
+    compile presentationDependencies.retrofit
+    compile presentationDependencies.retrofitConverter
+    compile presentationDependencies.gson
 }

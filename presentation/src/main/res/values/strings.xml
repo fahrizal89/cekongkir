@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Cek Ongkir</string>
-  <string name="url">http://www.android10.org/</string>
+    <string name="app_name">Cek Ongkir</string>
+    <string name="url">http://www.android10.org/</string>
 
-  <string name="activity_title_user_list">Users List</string>
-  <string name="activity_title_user_details">User Details</string>
+    <string name="activity_title_covered_area_list">Covered Area</string>
+    <string name="activity_title_user_details">User Details</string>
 
-  <string name="btn_text_open_ongkir">Checking Cost</string>
-  <string name="btn_text_covered_area">Covered Area</string>
-  <string name="btn_text_retry">Retry</string>
+    <string name="btn_text_open_ongkir">Checking Cost</string>
+    <string name="btn_text_covered_area">Covered Area</string>
+    <string name="btn_text_retry">Retry</string>
+    <string name="btn_text_get_cost">Calculate</string>
 
-  <string name="view_text_email">Email:</string>
-  <string name="view_text_followers">Followers:</string>
-  <string name="view_text_description">Description:</string>
+    <string name="view_text_email">Email:</string>
+    <string name="view_text_followers">Followers:</string>
+    <string name="view_text_description">Description:</string>
+    <string name="view_text_from">From</string>
+    <string name="view_text_to">To</string>
+    <string name="view_text_weight">Weight/gr</string>
+    <string name="view_text_courier">Courier</string>
 
-  <string name="string_content_description">Non accessible view</string>
+    <string name="string_content_description">Non accessible view</string>
 
-  //Exception messages
-  <string name="exception_message_generic">There was an application error</string>
-  <string name="exception_message_no_connection">There is no internet connection</string>
-  <string name="exception_message_user_not_found">Cannot retrieve province data. Check your internet connection</string>
+    //Exception messages
+    <string name="exception_message_generic">There was an application error</string>
+    <string name="exception_message_no_connection">There is no internet connection</string>
+    <string name="exception_message_user_not_found">Cannot retrieve province data. Check your internet connection</string>
 
 
-  <string name="btn_open_sign_in">Sign In</string>
-  <string name="view_text_title_name">Name</string>
-  <string name="view_text_title_password">Password</string>
+    <string name="btn_open_sign_in">Sign In</string>
+    <string name="view_text_title_name">Name</string>
+    <string name="view_text_title_password">Password</string>
+
+    <string-array name="arr_courier_type">
+        <item>jne</item>
+        <item>tiki</item>
+        <item>pos</item>
+    </string-array>
 </resources>
