@@ -3,17 +3,19 @@ package com.fahrizal.cekongkir.presentation.presenter;
 import android.support.annotation.NonNull;
 
 import com.fahrizal.cekongkir.domain.Cost;
+import com.fahrizal.cekongkir.domain.Province;
 import com.fahrizal.cekongkir.domain.exception.DefaultErrorBundle;
 import com.fahrizal.cekongkir.domain.exception.ErrorBundle;
 import com.fahrizal.cekongkir.domain.interactor.DefaultObserver;
 import com.fahrizal.cekongkir.domain.interactor.GetCost;
+import com.fahrizal.cekongkir.domain.interactor.GetProvinceList;
 import com.fahrizal.cekongkir.presentation.di.PerActivity;
 import com.fahrizal.cekongkir.presentation.exception.ErrorMessageFactory;
 import com.fahrizal.cekongkir.presentation.mapper.CostModelDataMapper;
-import com.fahrizal.cekongkir.presentation.mapper.ProvinceModelDataMapper;
 import com.fahrizal.cekongkir.presentation.model.CostModel;
 import com.fahrizal.cekongkir.presentation.view.CostCheckingView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,12 +31,14 @@ public class CostCheckingPresenter implements Presenter {
   private CostCheckingView viewListView;
   private final GetCost getCostUseCase;
   private final CostModelDataMapper costModelDataMapper;
+  private final GetProvinceList getProvinceListUseCase;
 
   @Inject
   public CostCheckingPresenter(GetCost getCostUseCase,
-                               CostModelDataMapper costModelDataMapper) {
+                               CostModelDataMapper costModelDataMapper,GetProvinceList getProvinceListUseCase) {
     this.getCostUseCase = getCostUseCase;
     this.costModelDataMapper=costModelDataMapper;
+    this.getProvinceListUseCase=getProvinceListUseCase;
   }
 
   public void setView(@NonNull CostCheckingView view) {
@@ -54,9 +58,8 @@ public class CostCheckingPresenter implements Presenter {
    * Initializes the presenter by start retrieving the user list.
    */
   public void doCheckingCost(String origin,String destination,String weight,String courierType) {
+    //automatically change to 1 if blank
     weight="".equals(weight)?"1":weight;
-
-
 
     this.postCosting(origin,destination,weight,courierType);
   }
@@ -120,15 +123,54 @@ public class CostCheckingPresenter implements Presenter {
   private void showCostCollectionInView(List<Cost.CostService> costs) {
     final Collection<CostModel> provinceModelsCollection =
             this.costModelDataMapper.transform(costs);
-    //TODO sementara masih di buat dlm 1 string
     String resultStr="";
-//    for (CostModel cm:provinceModelsCollection) {
-//      resultStr+= cm.getCode()+"\n";
-//    }
     for (Cost.CostService cost:costs) {
-      resultStr+= cost.getService()+ cost.getCost().get(0).getValue()+ "\n";
+      resultStr+= cost.getService()+": "+ cost.getCost().get(0).getValue()+ "\n";
     }
 
     this.viewListView.renderResult(resultStr);
+  }
+
+  /**
+   * Initializes the presenter by start retrieving the user list.
+   */
+  public void initialize() {
+    this.loadProvinceList();
+  }
+  /**
+   * Loads all provinces.
+   */
+  private void loadProvinceList() {
+    this.hideViewRetry();
+    this.showViewLoading();
+    this.getProvinceList();
+  }
+  private void getProvinceList() {
+    this.getProvinceListUseCase.execute(new CostCheckingPresenter.ProvinceListObserver(), null);
+  }
+  private final class ProvinceListObserver extends DefaultObserver<List<Province>> {
+
+    @Override public void onComplete() {
+      CostCheckingPresenter.this.hideViewLoading();
+    }
+
+    @Override public void onError(Throwable e) {
+      CostCheckingPresenter.this.hideViewLoading();
+      CostCheckingPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
+      CostCheckingPresenter.this.showViewRetry();
+    }
+
+    @Override public void onNext(List<Province> provinces) {
+      CostCheckingPresenter.this.showProvinceCollectionInView(provinces);
+    }
+  }
+  private void showProvinceCollectionInView(Collection<Province> provinceCollection) {
+    String[] strProvinces= new String[provinceCollection.size()];
+    List<Province> provinces =  new ArrayList<>(provinceCollection);
+    for (int i = 0; i < provinces.size(); i++) {
+      strProvinces[i]= provinces.get(i).getName();
+    }
+    //render to view
+    this.viewListView.renderProvinceList(strProvinces);
   }
 }

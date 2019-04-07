@@ -18,7 +18,7 @@ import com.fahrizal.cekongkir.presentation.di.components.CoveredAreaComponent;
 import com.fahrizal.cekongkir.presentation.model.ProvinceModel;
 import com.fahrizal.cekongkir.presentation.presenter.ProvinceListPresenter;
 import com.fahrizal.cekongkir.presentation.view.ProvinceListView;
-import com.fahrizal.cekongkir.presentation.view.adapter.UsersAdapter;
+import com.fahrizal.cekongkir.presentation.view.adapter.ProvincesAdapter;
 import com.fahrizal.cekongkir.presentation.view.adapter.UsersLayoutManager;
 import java.util.Collection;
 import javax.inject.Inject;
@@ -37,7 +37,8 @@ public class CoveredAreaListFragment extends BaseFragment implements ProvinceLis
 
   @Inject
   ProvinceListPresenter mPresenter;
-  @Inject UsersAdapter adapter;
+  @Inject
+  ProvincesAdapter adapter;
 
   @Bind(R.id.rv_covered_areas) RecyclerView rv_users;
   @Bind(R.id.rl_progress) RelativeLayout rl_progress;
@@ -159,8 +160,8 @@ public class CoveredAreaListFragment extends BaseFragment implements ProvinceLis
     CoveredAreaListFragment.this.loadUserList();
   }
 
-  private UsersAdapter.OnItemClickListener onItemClickListener =
-      new UsersAdapter.OnItemClickListener() {
+  private ProvincesAdapter.OnItemClickListener onItemClickListener =
+      new ProvincesAdapter.OnItemClickListener() {
         @Override public void onUserItemClicked(ProvinceModel provinceModel) {
           if (CoveredAreaListFragment.this.mPresenter != null && provinceModel != null) {
             CoveredAreaListFragment.this.mPresenter.onUserClicked(provinceModel);

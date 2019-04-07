@@ -20,7 +20,7 @@ import javax.inject.Inject;
 /**
  * Adaptar that manages a collection of {@link ProvinceModel}.
  */
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
+public class ProvincesAdapter extends RecyclerView.Adapter<ProvincesAdapter.UserViewHolder> {
 
   public interface OnItemClickListener {
     void onUserItemClicked(ProvinceModel provinceModel);
@@ -32,7 +32,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
   private OnItemClickListener onItemClickListener;
 
   @Inject
-  UsersAdapter(Context context) {
+  ProvincesAdapter(Context context) {
     this.layoutInflater =
         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     this.provincesCollection = Collections.emptyList();
@@ -52,8 +52,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     holder.textViewTitle.setText(userModel.getName());
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        if (UsersAdapter.this.onItemClickListener != null) {
-          UsersAdapter.this.onItemClickListener.onUserItemClicked(userModel);
+        if (ProvincesAdapter.this.onItemClickListener != null) {
+          ProvincesAdapter.this.onItemClickListener.onUserItemClicked(userModel);
         }
       }
     });

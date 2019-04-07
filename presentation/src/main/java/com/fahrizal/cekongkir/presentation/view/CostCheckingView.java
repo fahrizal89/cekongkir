@@ -1,5 +1,6 @@
 package com.fahrizal.cekongkir.presentation.view;
 
+import com.fahrizal.cekongkir.domain.Province;
 import com.fahrizal.cekongkir.presentation.model.ProvinceModel;
 
 import java.util.Collection;
@@ -11,5 +12,5 @@ import java.util.Collection;
 public interface CostCheckingView extends LoadDataView {
 
   void renderResult(String result);
-
+  void renderProvinceList(String[] strProvinces);
 }
