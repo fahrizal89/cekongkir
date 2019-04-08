@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 public class CityEntity {
 
   @SerializedName("city_id")
-  private String id;
+  private int id;
   @SerializedName("city_name")
   private String name;
   @SerializedName("province_id")
@@ -18,14 +18,13 @@ public class CityEntity {
   @SerializedName("postal_code")
   private String postalCode;
 
-  public String getId() {
+
+  public int getId() {
     return id;
   }
-
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
-
   public String getName() {
     return name;
   }

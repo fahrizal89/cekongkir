@@ -14,6 +14,6 @@ public interface CostDataStore {
   /**
    * Get an {@link Observable} which will emit a List of {@link ProvinceEntity}.
    */
-  Observable<List<CostEntity.CostServiceEntity>> getCost(String origin, String destination, String weight, String courierType);
+  Observable<List<CostEntity.CostServiceEntity>> getCost(int origin, int destination, String weight, String courierType);
 
 }

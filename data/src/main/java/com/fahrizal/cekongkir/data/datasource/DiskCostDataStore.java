@@ -25,7 +25,7 @@ class DiskCostDataStore implements CostDataStore {
   }
 
   @Override
-  public Observable<List<CostEntity.CostServiceEntity>> getCost(String origin, String destination, String weight, String courierType) {
+  public Observable<List<CostEntity.CostServiceEntity>> getCost(int origin, int destination, String weight, String courierType) {
     throw new UnsupportedOperationException("Operation is not available!!!");
   }
 }

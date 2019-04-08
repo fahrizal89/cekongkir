@@ -1,13 +1,13 @@
 package com.fahrizal.cekongkir.domain;
 
 public class City {
-    private String id;
+    private int id;
     private String name;
     private String provinceId;
     private String provinceName;
     private String postalCode;
 
-    public City(String id, String name, String provinceId, String provinceName, String postalCode) {
+    public City(int id, String name, String provinceId, String provinceName, String postalCode) {
         this.id = id;
         this.name = name;
         this.provinceId = provinceId;
@@ -15,14 +15,12 @@ public class City {
         this.postalCode = postalCode;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
-
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }

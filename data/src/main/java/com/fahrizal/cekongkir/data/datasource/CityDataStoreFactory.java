@@ -32,7 +32,7 @@ public class CityDataStoreFactory {
   /**
    * Create {@link ProvinceDataStore} from a user id.
    */
-  public CityDataStore create(String cityId) {
+  public CityDataStore create(int cityId) {
     CityDataStore provinceDataStore;
 
     if (!this.cityCache.isExpired() && this.cityCache.isCached(cityId)) {

@@ -1,24 +1,24 @@
 package com.fahrizal.cekongkir.data.model;
 
 public class CostRequest {
-    private String origin;
-    private String destination;
+    private int origin;
+    private int destination;
     private String weight;
     private String courier;
 
-    public String getOrigin() {
+    public int getOrigin() {
         return origin;
     }
 
-    public void setOrigin(String origin) {
+    public void setOrigin(int origin) {
         this.origin = origin;
     }
 
-    public String getDestination() {
+    public int getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(int destination) {
         this.destination = destination;
     }
 

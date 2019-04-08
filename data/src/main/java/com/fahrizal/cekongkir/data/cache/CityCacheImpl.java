@@ -53,7 +53,7 @@ public class CityCacheImpl implements CityCache {
     this.threadExecutor = executor;
   }
 
-  @Override public Observable<CityEntity> get(final String cityId) {
+  @Override public Observable<CityEntity> get(final int cityId) {
     return Observable.create(emitter -> {
       final File userEntityFile = CityCacheImpl.this.buildFile(cityId);
       final String fileContent = CityCacheImpl.this.fileManager.readFileContent(userEntityFile);
@@ -81,7 +81,7 @@ public class CityCacheImpl implements CityCache {
     }
   }
 
-  @Override public boolean isCached(String provinceId) {
+  @Override public boolean isCached(int provinceId) {
     final File userEntityFile = this.buildFile(provinceId);
     return this.fileManager.exists(userEntityFile);
   }
@@ -109,7 +109,7 @@ public class CityCacheImpl implements CityCache {
    * @param provinceId The id user to build the file.
    * @return A valid file.
    */
-  private File buildFile(String provinceId) {
+  private File buildFile(int provinceId) {
     final StringBuilder fileNameBuilder = new StringBuilder();
     fileNameBuilder.append(this.cacheDir.getPath());
     fileNameBuilder.append(File.separator);

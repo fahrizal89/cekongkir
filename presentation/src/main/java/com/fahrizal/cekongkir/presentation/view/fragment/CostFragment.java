@@ -16,11 +16,13 @@ import android.widget.TextView;
 import com.fahrizal.cekongkir.presentation.R;
 import com.fahrizal.cekongkir.presentation.di.components.CostCheckingComponent;
 import com.fahrizal.cekongkir.presentation.model.ProvinceModel;
+import com.fahrizal.cekongkir.presentation.model.RowModel;
 import com.fahrizal.cekongkir.presentation.presenter.CostCheckingPresenter;
 import com.fahrizal.cekongkir.presentation.view.CostCheckingView;
 import com.fahrizal.cekongkir.presentation.view.adapter.SimpleAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -151,12 +153,10 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
 
   @OnClick(R.id.btn_cost_checking)
   void onButtonCheckCostClick(){
-    //TODO data sebagian hard code
-    String origin="38";
-    String destination="39";
+    int origin=cityFromAdapter.get(spnFromCity.getSelectedItemPosition()).getId();
+    int destination=cityToAdapter.get(spnToCity.getSelectedItemPosition()).getId();
     String weight=edtWeight.getText().toString();
     String courierType=(String) spnCourier.getSelectedItem();
-
     mPresenter.doCheckingCost(origin,destination,weight,courierType);
   }
 
@@ -173,7 +173,7 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
   }
   private void setupSpinnerProvincesFrom(){
     provinceFromAdapter = new SimpleAdapter(getActivity(),
-            android.R.layout.simple_spinner_item, new ArrayList<>());
+            android.R.layout.simple_spinner_item, new ArrayList<RowModel>());
     provinceFromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spnFromProvince.setAdapter(provinceFromAdapter);
     spnFromProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -187,7 +187,7 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
   }
   private void setupSpinnerProvincesTo(){
     provinceToAdapter = new SimpleAdapter(getActivity(),
-            android.R.layout.simple_spinner_item, new ArrayList<>());
+            android.R.layout.simple_spinner_item, new ArrayList<RowModel>());
     provinceToAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spnToProvince.setAdapter(provinceToAdapter);
     spnToProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -201,13 +201,13 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
   }
   private void setupSpinnerCityFrom(){
     cityFromAdapter = new SimpleAdapter(getActivity(),
-            android.R.layout.simple_spinner_item, new ArrayList<>());
+            android.R.layout.simple_spinner_item, new ArrayList<RowModel>());
     cityFromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spnFromCity.setAdapter(cityFromAdapter);
   }
   private void setupSpinnerCityTo(){
     cityToAdapter = new SimpleAdapter(getActivity(),
-            android.R.layout.simple_spinner_item, new ArrayList<>());
+            android.R.layout.simple_spinner_item, new ArrayList<RowModel>());
     cityToAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spnToCity.setAdapter(cityToAdapter);
   }
@@ -223,7 +223,7 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
   }
 
   @Override
-  public void renderCityFromList(String[] strCities) {
+  public void renderCityFromList(List<RowModel> strCities) {
     //clear data
     cityFromAdapter.clear();
     //add data
@@ -231,7 +231,7 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
   }
 
   @Override
-  public void renderCityToList(String[] strCities) {
+  public void renderCityToList(List<RowModel> strCities) {
     //clear data
     cityToAdapter.clear();
     //add data

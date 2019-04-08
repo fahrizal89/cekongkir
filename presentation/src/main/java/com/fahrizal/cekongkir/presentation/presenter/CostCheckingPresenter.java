@@ -15,6 +15,7 @@ import com.fahrizal.cekongkir.presentation.di.PerActivity;
 import com.fahrizal.cekongkir.presentation.exception.ErrorMessageFactory;
 import com.fahrizal.cekongkir.presentation.mapper.CostModelDataMapper;
 import com.fahrizal.cekongkir.presentation.model.CostModel;
+import com.fahrizal.cekongkir.presentation.model.RowModel;
 import com.fahrizal.cekongkir.presentation.view.CostCheckingView;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class CostCheckingPresenter implements Presenter {
   /**
    * Initializes the presenter by start retrieving the user list.
    */
-  public void doCheckingCost(String origin,String destination,String weight,String courierType) {
+  public void doCheckingCost(int origin,int destination,String weight,String courierType) {
     //automatically change to 1 if blank
     weight="".equals(weight)?"1":weight;
 
@@ -72,7 +73,7 @@ public class CostCheckingPresenter implements Presenter {
   /**
    * Loads all provinces.
    */
-  private void postCosting(String origin,String destination,String weight,String courierType) {
+  private void postCosting(int origin,int destination,String weight,String courierType) {
     this.hideViewRetry();
     this.showViewLoading();
     this.postCostingToApi(origin,destination,weight,courierType);
@@ -100,7 +101,7 @@ public class CostCheckingPresenter implements Presenter {
     this.viewListView.showError(errorMessage);
   }
 
-  private void postCostingToApi(String origin,String destination,String weight,String courierType) {
+  private void postCostingToApi(int origin,int destination,String weight,String courierType) {
     GetCost.CostParam param = new GetCost.CostParam(
             origin,destination,weight,courierType
     );
@@ -219,21 +220,21 @@ public class CostCheckingPresenter implements Presenter {
     }
   }
   private void showCityFromCollectionInView(Collection<City> cityCollection) {
-    String[] strCities= new String[cityCollection.size()];
+    List<RowModel> rowCities= new ArrayList<>();
     List<City> cities =  new ArrayList<>(cityCollection);
     for (int i = 0; i < cities.size(); i++) {
-      strCities[i]= cities.get(i).getName();
+      rowCities.add(new RowModel(cities.get(i).getId(),cities.get(i).getName()));
     }
     //render to view
-    this.viewListView.renderCityFromList(strCities);
+    this.viewListView.renderCityFromList(rowCities);
   }
   private void showCityToCollectionInView(Collection<City> cityCollection) {
-    String[] strCities= new String[cityCollection.size()];
+    List<RowModel> rowCities= new ArrayList<>();
     List<City> cities =  new ArrayList<>(cityCollection);
     for (int i = 0; i < cities.size(); i++) {
-      strCities[i]= cities.get(i).getName();
+      rowCities.add(new RowModel(cities.get(i).getId(),cities.get(i).getName()));
     }
     //render to view
-    this.viewListView.renderCityToList(strCities);
+    this.viewListView.renderCityToList(rowCities);
   }
 }

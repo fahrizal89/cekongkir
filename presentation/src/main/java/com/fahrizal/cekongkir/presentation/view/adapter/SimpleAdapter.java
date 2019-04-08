@@ -4,16 +4,17 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
 
+import com.fahrizal.cekongkir.presentation.model.RowModel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleAdapter extends ArrayAdapter {
-    List list;
-    public SimpleAdapter(@NonNull Context context, int resource, @NonNull List objects) {
-        super(context, resource, objects);
-        list=objects;
+    public SimpleAdapter(@NonNull Context context, int resource, @NonNull List<RowModel> rows) {
+        super(context, resource, rows);
     }
 
-    public void clear(){
-        list.clear();
+    public RowModel get(int position){
+        return (RowModel) getItem(position);
     }
 }

@@ -14,6 +14,6 @@ public interface CostRepository {
   /**
    * Get an {@link Observable} which will emit a List of {@link Province}.
    */
-  Observable<List<Cost.CostService>> getCosts(String origin, String destination, String weight, String courierType);
+  Observable<List<Cost.CostService>> getCosts(int origin, int destination, String weight, String courierType);
 
 }

@@ -39,7 +39,7 @@ public class CostDataRepository implements CostRepository {
   }
 
   @Override
-  public Observable<List<Cost.CostService>> getCosts(String origin, String destination, String weight, String courierType) {
+  public Observable<List<Cost.CostService>> getCosts(int origin, int destination, String weight, String courierType) {
     final CostDataStore costDataStoreFactory = this.costDataStoreFactory.createCloudDataStore();
     return costDataStoreFactory.getCost(origin,destination,weight,courierType)
             .map(this.provinceEntityDataMapper::transform);

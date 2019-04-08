@@ -16,7 +16,7 @@ public interface CityCache {
    *
    * @param cityId The user id to retrieve data.
    */
-  Observable<CityEntity> get(final String cityId);
+  Observable<CityEntity> get(final int cityId);
 
   /**
    * Puts and element into the cache.
@@ -31,7 +31,7 @@ public interface CityCache {
    * @param provinceId The id used to look for inside the cache.
    * @return true if the element is cached, otherwise false.
    */
-  boolean isCached(final String provinceId);
+  boolean isCached(final int provinceId);
 
   /**
    * Checks if the cache is expired.

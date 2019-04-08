@@ -37,12 +37,12 @@ public class GetCost extends UseCase<List<Cost.CostService>, GetCost.CostParam> 
   }
 
   public static final class CostParam{
-    private String origin;
-    private String destination;
+    private int origin;
+    private int destination;
     private String weight;
     private String courier;
 
-    public CostParam(String origin, String destination, String weight, String courier) {
+    public CostParam(int origin, int destination, String weight, String courier) {
       this.origin = origin;
       this.destination = destination;
       this.weight = weight;

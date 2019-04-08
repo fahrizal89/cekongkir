@@ -34,7 +34,7 @@ class CloudCostDataStore implements CostDataStore {
 //  }
 
   @Override
-  public Observable<List<CostEntity.CostServiceEntity>> getCost(String origin, String destination, String weight, String courierType) {
+  public Observable<List<CostEntity.CostServiceEntity>> getCost(int origin, int destination, String weight, String courierType) {
     CostRequest costRequest = new CostRequest();
     costRequest.setOrigin(origin);
     costRequest.setDestination(destination);
