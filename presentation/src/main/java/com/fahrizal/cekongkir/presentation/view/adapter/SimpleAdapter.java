@@ -6,9 +6,9 @@ import android.widget.ArrayAdapter;
 
 import java.util.List;
 
-public class SimpleProvincesAdapter extends ArrayAdapter {
+public class SimpleAdapter extends ArrayAdapter {
     List list;
-    public SimpleProvincesAdapter(@NonNull Context context, int resource, @NonNull List objects) {
+    public SimpleAdapter(@NonNull Context context, int resource, @NonNull List objects) {
         super(context, resource, objects);
         list=objects;
     }

@@ -1,8 +1,10 @@
 package com.fahrizal.cekongkir.data.net;
 
 import com.fahrizal.cekongkir.data.entity.BaseResponse;
+import com.fahrizal.cekongkir.data.entity.CityResponse;
 import com.fahrizal.cekongkir.data.entity.CostResponse;
 import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
+import com.fahrizal.cekongkir.data.model.CityRequest;
 import com.fahrizal.cekongkir.data.model.CostRequest;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -25,11 +28,6 @@ public interface ApiService {
     @POST("cost")
     Call<CostResponse> getCost(@Header("key") String key,@Body CostRequest costRequest);
 
-
-    /*
-    ,
-                               @Body("destination") String destination,
-                               @Body("weight") String weight,
-                               @Body("courier") String courier
-     */
+    @GET("city")
+    Call<CityResponse> getCity(@Header("key") String key, @Query("province") String provinceId);
 }

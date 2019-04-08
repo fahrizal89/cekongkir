@@ -20,6 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Spinner
+        android:id="@+id/spn_from_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +32,11 @@
 
     <Spinner
         android:id="@+id/spn_to_province"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/spn_to_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

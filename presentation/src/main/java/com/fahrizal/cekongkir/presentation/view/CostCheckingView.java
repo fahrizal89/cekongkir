@@ -13,4 +13,6 @@ public interface CostCheckingView extends LoadDataView {
 
   void renderResult(String result);
   void renderProvinceList(String[] strProvinces);
+  void renderCityFromList(String[] strCities);
+  void renderCityToList(String[] strCities);
 }

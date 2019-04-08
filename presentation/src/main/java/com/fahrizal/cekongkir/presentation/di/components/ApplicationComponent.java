@@ -3,6 +3,7 @@ package com.fahrizal.cekongkir.presentation.di.components;
 import android.content.Context;
 import com.fahrizal.cekongkir.domain.executor.PostExecutionThread;
 import com.fahrizal.cekongkir.domain.executor.ThreadExecutor;
+import com.fahrizal.cekongkir.domain.repository.CityRepository;
 import com.fahrizal.cekongkir.domain.repository.CostRepository;
 import com.fahrizal.cekongkir.domain.repository.ProvinceRepository;
 import com.fahrizal.cekongkir.presentation.di.modules.ApplicationModule;
@@ -24,4 +25,5 @@ public interface ApplicationComponent {
   PostExecutionThread postExecutionThread();
   ProvinceRepository provinceRepository();
   CostRepository costRepository();
+  CityRepository cityRepository();
 }

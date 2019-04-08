@@ -1,7 +1,9 @@
 package com.fahrizal.cekongkir.data.net;
 
+import com.fahrizal.cekongkir.data.entity.CityEntity;
 import com.fahrizal.cekongkir.data.entity.CostEntity;
 import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
+import com.fahrizal.cekongkir.data.model.CityRequest;
 import com.fahrizal.cekongkir.data.model.CostRequest;
 
 import io.reactivex.Observable;
@@ -33,5 +35,7 @@ public interface RestApi {
   Observable<ProvinceEntity> userEntityById(final int userId);
 
   Observable<List<CostEntity.CostServiceEntity>> getCostDetailList(CostRequest costRequest);
+
+  Observable<List<CityEntity>> cityEntityList(CityRequest cityRequest);
 
 }

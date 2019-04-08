@@ -20,11 +20,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.fahrizal.cekongkir.data.entity.BaseResponse;
+import com.fahrizal.cekongkir.data.entity.CityEntity;
+import com.fahrizal.cekongkir.data.entity.CityResponse;
 import com.fahrizal.cekongkir.data.entity.CostEntity;
 import com.fahrizal.cekongkir.data.entity.CostResponse;
 import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
+import com.fahrizal.cekongkir.data.entity.mapper.CityEntityJsonMapper;
 import com.fahrizal.cekongkir.data.entity.mapper.ProvinceEntityJsonMapper;
 import com.fahrizal.cekongkir.data.exception.NetworkConnectionException;
+import com.fahrizal.cekongkir.data.model.CityRequest;
 import com.fahrizal.cekongkir.data.model.CostRequest;
 
 import io.reactivex.Observable;
@@ -40,6 +44,7 @@ public class RestApiImpl implements RestApi {
 
   private final Context context;
   private final ProvinceEntityJsonMapper provinceEntityJsonMapper;
+  private final CityEntityJsonMapper cityEntityJsonMapper;
   ApiService apiService;
   CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -55,10 +60,24 @@ public class RestApiImpl implements RestApi {
     }
     this.context = context.getApplicationContext();
     this.provinceEntityJsonMapper = provinceEntityJsonMapper;
+    cityEntityJsonMapper=null;
     this.apiService=apiService;
   }
-
-
+  /**
+   * Constructor of the class
+   *
+   * @param context {@link android.content.Context}.
+   * @param cityEntityJsonMapper {@link ProvinceEntityJsonMapper}.
+   */
+  public RestApiImpl(Context context, CityEntityJsonMapper cityEntityJsonMapper,ApiService apiService) {
+    if (context == null || cityEntityJsonMapper == null) {
+      throw new IllegalArgumentException("The constructor parameters cannot be null!!!");
+    }
+    this.context = context.getApplicationContext();
+    this.cityEntityJsonMapper = cityEntityJsonMapper;
+    this.apiService=apiService;
+    this.provinceEntityJsonMapper = null;
+  }
 
   @Override public Observable<List<ProvinceEntity>> provinceEntityList() {
     return Observable.create(emitter -> {
@@ -134,6 +153,29 @@ public class RestApiImpl implements RestApi {
           if (response != null) {
             List<CostEntity.CostServiceEntity> costs= response.getRajaOngkir().getResults().get(0).getCosts();
             emitter.onNext(costs);
+            emitter.onComplete();
+          } else {
+            emitter.onError(new NetworkConnectionException());
+          }
+        } catch (Exception e) {
+          emitter.onError(new NetworkConnectionException(e.getCause()));
+        }
+      } else {
+        emitter.onError(new NetworkConnectionException());
+      }
+    });
+  }
+
+  @Override
+  public Observable<List<CityEntity>> cityEntityList(CityRequest cityRequest) {
+    return Observable.create(emitter -> {
+      if (isThereInternetConnection()) {
+        try {
+          CityResponse response=apiService.getCity(RestApi.API_KEY,cityRequest.getProvinceId()).execute().body();
+//          CityResponse response=apiService.getCity(RestApi.API_KEY).execute().body();
+          if (response != null) {
+            List<CityEntity> cities= response.getRajaOngkir().getResults();
+            emitter.onNext(cities);
             emitter.onComplete();
           } else {
             emitter.onError(new NetworkConnectionException());

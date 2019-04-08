@@ -29,7 +29,7 @@ class CloudCostDataStore implements CostDataStore {
     this.costCache = costCache;
   }
 
-//  @Override public Observable<ProvinceEntity> userEntityDetails(final int userId) {
+//  @Override public Observable<ProvinceEntity> cityEntityDetails(final int userId) {
 //    return this.restApi.userEntityById(userId).doOnNext(CloudCostDataStore.this.costCache::put);
 //  }
 

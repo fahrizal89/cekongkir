@@ -17,7 +17,10 @@ package com.fahrizal.cekongkir.presentation.di.modules;
 
 import android.content.Context;
 
+import com.fahrizal.cekongkir.data.CityDataRepository;
 import com.fahrizal.cekongkir.data.CostDataRepository;
+import com.fahrizal.cekongkir.data.cache.CityCache;
+import com.fahrizal.cekongkir.data.cache.CityCacheImpl;
 import com.fahrizal.cekongkir.data.cache.CostCache;
 import com.fahrizal.cekongkir.data.cache.CostCacheImpl;
 import com.fahrizal.cekongkir.data.cache.ProvinceCache;
@@ -28,6 +31,7 @@ import com.fahrizal.cekongkir.data.ProvinceDataRepository;
 import com.fahrizal.cekongkir.data.net.ApiService;
 import com.fahrizal.cekongkir.domain.executor.PostExecutionThread;
 import com.fahrizal.cekongkir.domain.executor.ThreadExecutor;
+import com.fahrizal.cekongkir.domain.repository.CityRepository;
 import com.fahrizal.cekongkir.domain.repository.CostRepository;
 import com.fahrizal.cekongkir.domain.repository.ProvinceRepository;
 import com.fahrizal.cekongkir.presentation.AndroidApplication;
@@ -82,4 +86,13 @@ public class ApplicationModule {
     return costCache;
   }
 
+  //city
+  @Provides @Singleton
+  CityRepository provideCityRepository(CityDataRepository cityRepository) {
+    return cityRepository;
+  }
+  @Provides @Singleton
+  CityCache provideCityCache(CityCacheImpl cityCache) {
+    return cityCache;
+  }
 }

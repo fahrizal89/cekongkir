@@ -6,22 +6,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.fahrizal.cekongkir.domain.Province;
 import com.fahrizal.cekongkir.presentation.R;
 import com.fahrizal.cekongkir.presentation.di.components.CostCheckingComponent;
 import com.fahrizal.cekongkir.presentation.model.ProvinceModel;
 import com.fahrizal.cekongkir.presentation.presenter.CostCheckingPresenter;
 import com.fahrizal.cekongkir.presentation.view.CostCheckingView;
-import com.fahrizal.cekongkir.presentation.view.adapter.SimpleProvincesAdapter;
+import com.fahrizal.cekongkir.presentation.view.adapter.SimpleAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -48,11 +47,15 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
   @Bind(R.id.txt_result)TextView txt_result;
   @Bind(R.id.edt_weight) EditText edtWeight;
   @Bind(R.id.spn_from_province) Spinner spnFromProvince;
+  @Bind(R.id.spn_from_city) Spinner spnFromCity;
   @Bind(R.id.spn_to_province) Spinner spnToProvince;
+  @Bind(R.id.spn_to_city) Spinner spnToCity;
   @Bind(R.id.spn_courier) Spinner spnCourier;
   ArrayAdapter<String> dataAdapter;
-  SimpleProvincesAdapter provinceFromAdapter;
-  SimpleProvincesAdapter provinceToAdapter;
+  SimpleAdapter provinceFromAdapter;
+  SimpleAdapter provinceToAdapter;
+  SimpleAdapter cityFromAdapter;
+  SimpleAdapter cityToAdapter;
 
   private CostListener costListener;
   public CostFragment() {
@@ -86,6 +89,8 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
       setupSpinnerDataCouriers();
       setupSpinnerProvincesFrom();
       setupSpinnerProvincesTo();
+      setupSpinnerCityFrom();
+      setupSpinnerCityTo();
 
       //initialize data from server
       mPresenter.initialize();
@@ -167,16 +172,44 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
     spnCourier.setAdapter(dataAdapter);
   }
   private void setupSpinnerProvincesFrom(){
-    provinceFromAdapter = new SimpleProvincesAdapter(getActivity(),
+    provinceFromAdapter = new SimpleAdapter(getActivity(),
             android.R.layout.simple_spinner_item, new ArrayList<>());
     provinceFromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spnFromProvince.setAdapter(provinceFromAdapter);
+    spnFromProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        mPresenter.searchCityFrom(i);
+      }
+      @Override
+      public void onNothingSelected(AdapterView<?> adapterView) {}
+    });
   }
   private void setupSpinnerProvincesTo(){
-    provinceToAdapter = new SimpleProvincesAdapter(getActivity(),
+    provinceToAdapter = new SimpleAdapter(getActivity(),
             android.R.layout.simple_spinner_item, new ArrayList<>());
     provinceToAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spnToProvince.setAdapter(provinceToAdapter);
+    spnToProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        mPresenter.searchCityTo(i);
+      }
+      @Override
+      public void onNothingSelected(AdapterView<?> adapterView) {}
+    });
+  }
+  private void setupSpinnerCityFrom(){
+    cityFromAdapter = new SimpleAdapter(getActivity(),
+            android.R.layout.simple_spinner_item, new ArrayList<>());
+    cityFromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    spnFromCity.setAdapter(cityFromAdapter);
+  }
+  private void setupSpinnerCityTo(){
+    cityToAdapter = new SimpleAdapter(getActivity(),
+            android.R.layout.simple_spinner_item, new ArrayList<>());
+    cityToAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    spnToCity.setAdapter(cityToAdapter);
   }
   @Override
   public void renderProvinceList(String[] strProvinces) {
@@ -187,5 +220,21 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
     //add data
     provinceFromAdapter.addAll(strProvinces);
     provinceToAdapter.addAll(strProvinces);
+  }
+
+  @Override
+  public void renderCityFromList(String[] strCities) {
+    //clear data
+    cityFromAdapter.clear();
+    //add data
+    cityFromAdapter.addAll(strCities);
+  }
+
+  @Override
+  public void renderCityToList(String[] strCities) {
+    //clear data
+    cityToAdapter.clear();
+    //add data
+    cityToAdapter.addAll(strCities);
   }
 }

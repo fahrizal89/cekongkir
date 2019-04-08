@@ -31,10 +31,10 @@ public class ProvinceDataStoreFactory {
   /**
    * Create {@link ProvinceDataStore} from a user id.
    */
-  public ProvinceDataStore create(int userId) {
+  public ProvinceDataStore create(int provinceId) {
     ProvinceDataStore provinceDataStore;
 
-    if (!this.provinceCache.isExpired() && this.provinceCache.isCached(userId)) {
+    if (!this.provinceCache.isExpired() && this.provinceCache.isCached(provinceId)) {
       provinceDataStore = new DiskProvinceDataStore(this.provinceCache);
     } else {
       provinceDataStore = createCloudDataStore();

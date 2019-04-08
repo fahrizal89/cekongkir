@@ -2,11 +2,13 @@ package com.fahrizal.cekongkir.presentation.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.fahrizal.cekongkir.domain.City;
 import com.fahrizal.cekongkir.domain.Cost;
 import com.fahrizal.cekongkir.domain.Province;
 import com.fahrizal.cekongkir.domain.exception.DefaultErrorBundle;
 import com.fahrizal.cekongkir.domain.exception.ErrorBundle;
 import com.fahrizal.cekongkir.domain.interactor.DefaultObserver;
+import com.fahrizal.cekongkir.domain.interactor.GetCityList;
 import com.fahrizal.cekongkir.domain.interactor.GetCost;
 import com.fahrizal.cekongkir.domain.interactor.GetProvinceList;
 import com.fahrizal.cekongkir.presentation.di.PerActivity;
@@ -32,13 +34,16 @@ public class CostCheckingPresenter implements Presenter {
   private final GetCost getCostUseCase;
   private final CostModelDataMapper costModelDataMapper;
   private final GetProvinceList getProvinceListUseCase;
+  private final GetCityList getCityListUseCase;
 
   @Inject
   public CostCheckingPresenter(GetCost getCostUseCase,
-                               CostModelDataMapper costModelDataMapper,GetProvinceList getProvinceListUseCase) {
+                               CostModelDataMapper costModelDataMapper,GetProvinceList getProvinceListUseCase,
+                               GetCityList getCityListUseCase) {
     this.getCostUseCase = getCostUseCase;
     this.costModelDataMapper=costModelDataMapper;
     this.getProvinceListUseCase=getProvinceListUseCase;
+    this.getCityListUseCase=getCityListUseCase;
   }
 
   public void setView(@NonNull CostCheckingView view) {
@@ -172,5 +177,63 @@ public class CostCheckingPresenter implements Presenter {
     }
     //render to view
     this.viewListView.renderProvinceList(strProvinces);
+  }
+  public void searchCityFrom(int index){
+    String provinceId= (index+1)+"";
+    getCityListUseCase.execute(new CityFromListObserver(),new GetCityList.CityParam(provinceId));
+  }
+  public void searchCityTo(int index){
+    String provinceId= (index+1)+"";
+    getCityListUseCase.execute(new CityToListObserver(),new GetCityList.CityParam(provinceId));
+  }
+  private final class CityFromListObserver extends DefaultObserver<List<City>> {
+
+    @Override public void onComplete() {
+      CostCheckingPresenter.this.hideViewLoading();
+    }
+
+    @Override public void onError(Throwable e) {
+      CostCheckingPresenter.this.hideViewLoading();
+      CostCheckingPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
+      CostCheckingPresenter.this.showViewRetry();
+    }
+
+    @Override public void onNext(List<City> cities) {
+      CostCheckingPresenter.this.showCityFromCollectionInView(cities);
+    }
+  }
+  private final class CityToListObserver extends DefaultObserver<List<City>> {
+
+    @Override public void onComplete() {
+      CostCheckingPresenter.this.hideViewLoading();
+    }
+
+    @Override public void onError(Throwable e) {
+      CostCheckingPresenter.this.hideViewLoading();
+      CostCheckingPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
+      CostCheckingPresenter.this.showViewRetry();
+    }
+
+    @Override public void onNext(List<City> cities) {
+      CostCheckingPresenter.this.showCityToCollectionInView(cities);
+    }
+  }
+  private void showCityFromCollectionInView(Collection<City> cityCollection) {
+    String[] strCities= new String[cityCollection.size()];
+    List<City> cities =  new ArrayList<>(cityCollection);
+    for (int i = 0; i < cities.size(); i++) {
+      strCities[i]= cities.get(i).getName();
+    }
+    //render to view
+    this.viewListView.renderCityFromList(strCities);
+  }
+  private void showCityToCollectionInView(Collection<City> cityCollection) {
+    String[] strCities= new String[cityCollection.size()];
+    List<City> cities =  new ArrayList<>(cityCollection);
+    for (int i = 0; i < cities.size(); i++) {
+      strCities[i]= cities.get(i).getName();
+    }
+    //render to view
+    this.viewListView.renderCityToList(strCities);
   }
 }
