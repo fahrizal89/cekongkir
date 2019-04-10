@@ -4,27 +4,18 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import lombok.Data;
+
+@Data
 public class CityResponse {
 
     @SerializedName("rajaongkir")
     private RajaOngkir rajaOngkir;
-
+    @Data
     public class RajaOngkir{
 
         private List<CityEntity> results;
 
-        public List<CityEntity> getResults() {
-            return results;
-        }
-        public void setResults(List<CityEntity> results) {
-            this.results = results;
-        }
     }
 
-    public RajaOngkir getRajaOngkir() {
-        return rajaOngkir;
-    }
-    public void setRajaOngkir(RajaOngkir rajaOngkir) {
-        this.rajaOngkir = rajaOngkir;
-    }
 }

@@ -15,11 +15,7 @@ android {
         versionName globalConfiguration.getAt("androidVersionName")
         testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
         testApplicationId globalConfiguration.getAt("testApplicationId")
-    }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     packagingOptions {
@@ -87,4 +83,7 @@ dependencies {
     implementation presentationDependencies.retrofit
     implementation presentationDependencies.retrofitConverter
     implementation presentationDependencies.gson
+
+    compileOnly presentationDependencies.lombok
+    annotationProcessor presentationDependencies.lombok
 }

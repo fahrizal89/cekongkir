@@ -2,9 +2,12 @@ package com.fahrizal.cekongkir.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Data;
+
 /**
  * Province Entity used in the data layer.
  */
+@Data
 public class ProvinceEntity {
 
   @SerializedName("province_id")
@@ -13,20 +16,4 @@ public class ProvinceEntity {
   @SerializedName("province")
   private String name;
 
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
 }

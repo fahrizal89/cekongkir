@@ -5,12 +5,11 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'me.tatarka:gradle-retrolambda:3.2.3'
+    classpath 'me.tatarka:gradle-retrolambda:3.7.0'
   }
 }
 
 apply plugin: 'com.android.library'
-//apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
@@ -26,11 +25,6 @@ android {
     versionCode globalConfiguration.getAt("androidVersionCode")
   }
 
-//  compileOptions {
-//    sourceCompatibility JavaVersion.VERSION_1_8
-//    targetCompatibility JavaVersion.VERSION_1_8
-//  }
-
   packagingOptions {
     exclude 'LICENSE.txt'
     exclude 'META-INF/DEPENDENCIES'
@@ -45,6 +39,10 @@ android {
     ignoreWarnings true
     disable 'InvalidPackage'  // Some libraries have issues with this
     disable 'OldTargetApi'    // Due to Robolectric that modifies the manifest when running tests
+  }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
   }
 }
 
@@ -71,8 +69,6 @@ dependencies {
   implementation dataDependencies.gson
   implementation dataDependencies.retrofitAdapter
 
-  //room
-//  implementation dataDependencies.roomRuntime
-//  annotationProcessor dataDependencies.roomRuntimeAnnotation
-//  testImplementation "android.arch.persistence.room:testing:$room_version"
+  compileOnly dataDependencies.lombok
+  annotationProcessor dataDependencies.lombok
 }

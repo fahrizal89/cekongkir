@@ -218,8 +218,8 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
     provinceToAdapter.clear();
 
     //add data
-    provinceFromAdapter.addAll(strProvinces);
-    provinceToAdapter.addAll(strProvinces);
+    provinceFromAdapter.addAll((Object[])strProvinces);
+    provinceToAdapter.addAll((Object[])strProvinces);
   }
 
   @Override
