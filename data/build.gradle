@@ -1,5 +1,7 @@
 buildscript {
   repositories {
+    google()
+    jcenter()
     mavenCentral()
   }
   dependencies {
@@ -8,7 +10,7 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
@@ -17,7 +19,6 @@ android {
   def globalConfiguration = rootProject.extensions.getByName("ext")
 
   compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
-  buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
 
   defaultConfig {
     minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
@@ -25,10 +26,10 @@ android {
     versionCode globalConfiguration.getAt("androidVersionCode")
   }
 
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
+//  compileOptions {
+//    sourceCompatibility JavaVersion.VERSION_1_8
+//    targetCompatibility JavaVersion.VERSION_1_8
+//  }
 
   packagingOptions {
     exclude 'LICENSE.txt'
@@ -51,24 +52,24 @@ dependencies {
   def dataDependencies = rootProject.ext.dataDependencies
   def testDependencies = rootProject.ext.dataTestDependencies
 
-  compile project(':domain')
-  provided dataDependencies.javaxAnnotation
-  compile dataDependencies.javaxInject
-  compile dataDependencies.okHttp
-  compile dataDependencies.gson
-  compile dataDependencies.rxJava
-  compile dataDependencies.rxAndroid
-  compile dataDependencies.androidAnnotations
+  implementation project(':domain')
+  compileOnly dataDependencies.javaxAnnotation
+  implementation dataDependencies.javaxInject
+  implementation dataDependencies.okHttp
+  implementation dataDependencies.gson
+  implementation dataDependencies.rxJava
+  implementation dataDependencies.rxAndroid
+  implementation dataDependencies.androidAnnotations
 
-  testCompile testDependencies.junit
-  testCompile testDependencies.assertj
-  testCompile testDependencies.mockito
-  testCompile testDependencies.robolectric
+  testImplementation testDependencies.junit
+  testImplementation testDependencies.assertj
+  testImplementation testDependencies.mockito
+  testImplementation testDependencies.robolectric
 
-  compile dataDependencies.retrofit
-  compile dataDependencies.retrofitConverter
-  compile dataDependencies.gson
-  compile dataDependencies.retrofitAdapter
+  implementation dataDependencies.retrofit
+  implementation dataDependencies.retrofitConverter
+  implementation dataDependencies.gson
+  implementation dataDependencies.retrofitAdapter
 
   //room
 //  implementation dataDependencies.roomRuntime

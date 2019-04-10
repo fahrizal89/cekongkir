@@ -5,7 +5,7 @@ import android.widget.Button;
 
 import com.fahrizal.cekongkir.presentation.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -14,7 +14,7 @@ import butterknife.OnClick;
  */
 public class MainActivity extends BaseActivity {
 
-  @Bind(R.id.btnAreaCovered) Button btn_LoadData;
+  @BindView(R.id.btnAreaCovered) Button btn_LoadData;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

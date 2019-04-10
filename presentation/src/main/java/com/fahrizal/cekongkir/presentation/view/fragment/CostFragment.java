@@ -26,7 +26,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -44,15 +44,15 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
 
   @Inject
   CostCheckingPresenter mPresenter;
-  @Bind(R.id.rl_progress) RelativeLayout rl_progress;
-  @Bind(R.id.rl_retry) RelativeLayout rl_retry;
-  @Bind(R.id.txt_result)TextView txt_result;
-  @Bind(R.id.edt_weight) EditText edtWeight;
-  @Bind(R.id.spn_from_province) Spinner spnFromProvince;
-  @Bind(R.id.spn_from_city) Spinner spnFromCity;
-  @Bind(R.id.spn_to_province) Spinner spnToProvince;
-  @Bind(R.id.spn_to_city) Spinner spnToCity;
-  @Bind(R.id.spn_courier) Spinner spnCourier;
+  @BindView(R.id.rl_progress) RelativeLayout rl_progress;
+  @BindView(R.id.rl_retry) RelativeLayout rl_retry;
+  @BindView(R.id.txt_result)TextView txt_result;
+  @BindView(R.id.edt_weight) EditText edtWeight;
+  @BindView(R.id.spn_from_province) Spinner spnFromProvince;
+  @BindView(R.id.spn_from_city) Spinner spnFromCity;
+  @BindView(R.id.spn_to_province) Spinner spnToProvince;
+  @BindView(R.id.spn_to_city) Spinner spnToCity;
+  @BindView(R.id.spn_courier) Spinner spnCourier;
   ArrayAdapter<String> dataAdapter;
   SimpleAdapter provinceFromAdapter;
   SimpleAdapter provinceToAdapter;
@@ -111,7 +111,7 @@ public class CostFragment extends BaseFragment implements CostCheckingView {
 
   @Override public void onDestroyView() {
     super.onDestroyView();
-    ButterKnife.unbind(this);
+//    ButterKnife.unbind(this);
   }
 
   @Override public void onDestroy() {

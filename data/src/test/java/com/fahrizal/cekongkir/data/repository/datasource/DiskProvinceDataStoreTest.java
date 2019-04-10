@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fahrizal.cekongkir.data.datasource;
+package com.fahrizal.cekongkir.data.repository.datasource;
 
 import com.fahrizal.cekongkir.data.cache.ProvinceCache;
 import org.junit.Before;
