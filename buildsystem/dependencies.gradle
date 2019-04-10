@@ -24,8 +24,9 @@ ext {
   androidAnnotationsVersion = '21.0.3'
   arrowVersion = '1.0.0'
   lombokVersion = '1.18.2'
-  retrofit = '2.5.0'
-  gson = '2.6.2'
+  retrofitVersion = '2.5.0'
+  gsonVersion = '2.6.2'
+  roomVersion = '1.1.0'
 
   //Testing
   robolectricVersion = '3.1.1'
@@ -49,9 +50,9 @@ ext {
       rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
       javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
       lombok:             "org.projectlombok:lombok:${lombokVersion}",
-      retrofit:           "com.squareup.retrofit2:retrofit:${retrofit}",
-      retrofitConverter:  "com.squareup.retrofit2:converter-gson:${retrofit}",
-      gson:               "com.google.code.gson:gson:${gson}"
+      retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+      retrofitConverter:  "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+      gson:               "com.google.code.gson:gson:${gsonVersion}"
   ]
 
   presentationTestDependencies = [
@@ -87,9 +88,11 @@ ext {
       javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
       androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
       lombok:             "org.projectlombok:lombok:${lombokVersion}",
-      retrofit:           "com.squareup.retrofit2:retrofit:${retrofit}",
-      retrofitConverter:  "com.squareup.retrofit2:converter-gson:${retrofit}",
-      retrofitAdapter:    "com.squareup.retrofit2:adapter-rxjava2:${retrofit}",
+      retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+      retrofitConverter:  "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+      retrofitAdapter:    "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+      roomRuntime:        "android.arch.persistence.room:runtime:${roomVersion}",
+      roomRuntimeAnnotation:"android.arch.persistence.room:compiler:${roomVersion}"
   ]
 
   dataTestDependencies = [

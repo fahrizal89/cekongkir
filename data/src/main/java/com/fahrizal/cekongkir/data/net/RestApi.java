@@ -3,8 +3,8 @@ package com.fahrizal.cekongkir.data.net;
 import com.fahrizal.cekongkir.data.entity.CityEntity;
 import com.fahrizal.cekongkir.data.entity.CostEntity;
 import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
-import com.fahrizal.cekongkir.data.model.CityRequest;
-import com.fahrizal.cekongkir.data.model.CostRequest;
+import com.fahrizal.cekongkir.data.entity.CityRequest;
+import com.fahrizal.cekongkir.data.entity.CostRequest;
 
 import io.reactivex.Observable;
 

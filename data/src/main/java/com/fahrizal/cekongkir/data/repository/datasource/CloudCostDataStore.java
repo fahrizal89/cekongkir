@@ -1,9 +1,9 @@
-package com.fahrizal.cekongkir.data.datasource;
+package com.fahrizal.cekongkir.data.repository.datasource;
 
 import com.fahrizal.cekongkir.data.cache.CostCache;
 import com.fahrizal.cekongkir.data.cache.ProvinceCache;
 import com.fahrizal.cekongkir.data.entity.CostEntity;
-import com.fahrizal.cekongkir.data.model.CostRequest;
+import com.fahrizal.cekongkir.data.entity.CostRequest;
 import com.fahrizal.cekongkir.data.net.RestApi;
 
 import java.util.List;

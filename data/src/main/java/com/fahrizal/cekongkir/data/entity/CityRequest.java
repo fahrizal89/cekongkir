@@ -1,4 +1,4 @@
-package com.fahrizal.cekongkir.data.model;
+package com.fahrizal.cekongkir.data.entity;
 
 public class CityRequest {
     private String provinceId;

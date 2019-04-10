@@ -28,8 +28,8 @@ import com.fahrizal.cekongkir.data.entity.ProvinceEntity;
 import com.fahrizal.cekongkir.data.entity.mapper.CityEntityJsonMapper;
 import com.fahrizal.cekongkir.data.entity.mapper.ProvinceEntityJsonMapper;
 import com.fahrizal.cekongkir.data.exception.NetworkConnectionException;
-import com.fahrizal.cekongkir.data.model.CityRequest;
-import com.fahrizal.cekongkir.data.model.CostRequest;
+import com.fahrizal.cekongkir.data.entity.CityRequest;
+import com.fahrizal.cekongkir.data.entity.CostRequest;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
@@ -171,8 +171,8 @@ public class RestApiImpl implements RestApi {
     return Observable.create(emitter -> {
       if (isThereInternetConnection()) {
         try {
-          CityResponse response=apiService.getCity(RestApi.API_KEY,cityRequest.getProvinceId()).execute().body();
-//          CityResponse response=apiService.getCity(RestApi.API_KEY).execute().body();
+          CityResponse response=apiService.getCities(RestApi.API_KEY,cityRequest.getProvinceId()).execute().body();
+//          CityResponse response=apiService.getCities(RestApi.API_KEY).execute().body();
           if (response != null) {
             List<CityEntity> cities= response.getRajaOngkir().getResults();
             emitter.onNext(cities);

@@ -1,4 +1,4 @@
-package com.fahrizal.cekongkir.data.datasource;
+package com.fahrizal.cekongkir.data.repository.datasource;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

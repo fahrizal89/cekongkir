@@ -17,17 +17,17 @@ package com.fahrizal.cekongkir.presentation.di.modules;
 
 import android.content.Context;
 
-import com.fahrizal.cekongkir.data.CityDataRepository;
-import com.fahrizal.cekongkir.data.CostDataRepository;
+import com.fahrizal.cekongkir.data.repository.CityDataRepository;
+import com.fahrizal.cekongkir.data.repository.CostDataRepository;
 import com.fahrizal.cekongkir.data.cache.CityCache;
 import com.fahrizal.cekongkir.data.cache.CityCacheImpl;
 import com.fahrizal.cekongkir.data.cache.CostCache;
 import com.fahrizal.cekongkir.data.cache.CostCacheImpl;
 import com.fahrizal.cekongkir.data.cache.ProvinceCache;
 import com.fahrizal.cekongkir.data.cache.ProvinceCacheImpl;
-import com.fahrizal.cekongkir.data.datasource.RetrofitDataStore;
+import com.fahrizal.cekongkir.data.repository.datasource.RetrofitDataStore;
 import com.fahrizal.cekongkir.data.executor.JobExecutor;
-import com.fahrizal.cekongkir.data.ProvinceDataRepository;
+import com.fahrizal.cekongkir.data.repository.ProvinceDataRepository;
 import com.fahrizal.cekongkir.data.net.ApiService;
 import com.fahrizal.cekongkir.domain.executor.PostExecutionThread;
 import com.fahrizal.cekongkir.domain.executor.ThreadExecutor;

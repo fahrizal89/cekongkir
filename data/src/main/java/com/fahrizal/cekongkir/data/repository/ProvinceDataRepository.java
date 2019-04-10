@@ -1,8 +1,8 @@
-package com.fahrizal.cekongkir.data;
+package com.fahrizal.cekongkir.data.repository;
 
-import com.fahrizal.cekongkir.data.datasource.ProvinceDataStoreFactory;
+import com.fahrizal.cekongkir.data.repository.datasource.ProvinceDataStoreFactory;
 import com.fahrizal.cekongkir.data.entity.mapper.ProvinceEntityDataMapper;
-import com.fahrizal.cekongkir.data.datasource.ProvinceDataStore;
+import com.fahrizal.cekongkir.data.repository.datasource.ProvinceDataStore;
 import com.fahrizal.cekongkir.domain.Province;
 import com.fahrizal.cekongkir.domain.repository.ProvinceRepository;
 

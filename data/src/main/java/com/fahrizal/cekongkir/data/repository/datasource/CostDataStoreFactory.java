@@ -1,10 +1,9 @@
-package com.fahrizal.cekongkir.data.datasource;
+package com.fahrizal.cekongkir.data.repository.datasource;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.fahrizal.cekongkir.data.cache.CostCache;
-import com.fahrizal.cekongkir.data.cache.ProvinceCache;
 import com.fahrizal.cekongkir.data.entity.mapper.ProvinceEntityJsonMapper;
 import com.fahrizal.cekongkir.data.net.ApiService;
 import com.fahrizal.cekongkir.data.net.RestApi;

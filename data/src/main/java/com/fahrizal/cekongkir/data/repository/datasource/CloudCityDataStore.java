@@ -1,8 +1,8 @@
-package com.fahrizal.cekongkir.data.datasource;
+package com.fahrizal.cekongkir.data.repository.datasource;
 
 import com.fahrizal.cekongkir.data.cache.CityCache;
 import com.fahrizal.cekongkir.data.entity.CityEntity;
-import com.fahrizal.cekongkir.data.model.CityRequest;
+import com.fahrizal.cekongkir.data.entity.CityRequest;
 import com.fahrizal.cekongkir.data.net.RestApi;
 
 import java.util.List;

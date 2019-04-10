@@ -17,12 +17,9 @@ package com.fahrizal.cekongkir.presentation.di.modules;
 
 import android.app.Activity;
 
-import com.fahrizal.cekongkir.data.datasource.RetrofitDataStore;
-import com.fahrizal.cekongkir.data.net.ApiService;
 import com.fahrizal.cekongkir.presentation.di.PerActivity;
 import dagger.Module;
 import dagger.Provides;
-import retrofit2.Retrofit;
 
 /**
  * A module to wrap the Activity state and expose it to the graph.
