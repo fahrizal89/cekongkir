@@ -24,7 +24,7 @@ class DiskCityDataStore implements CityDataStore {
   }
 
   @Override
-  public Observable<List<CityEntity>> cityEntityList(String provinceId) {
+  public Observable<List<CityEntity>> cityEntityList(int provinceId) {
     throw new UnsupportedOperationException("Operation is not available!!!");
   }
 }

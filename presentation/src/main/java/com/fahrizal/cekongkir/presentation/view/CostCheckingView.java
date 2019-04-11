@@ -4,7 +4,6 @@ import com.fahrizal.cekongkir.domain.Province;
 import com.fahrizal.cekongkir.presentation.model.ProvinceModel;
 import com.fahrizal.cekongkir.presentation.model.RowModel;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -13,8 +12,11 @@ import java.util.List;
  */
 public interface CostCheckingView extends LoadDataView {
 
-  void renderResult(String result);
-  void renderProvinceList(String[] strProvinces);
-  void renderCityFromList(List<RowModel> strCities);
-  void renderCityToList(List<RowModel> strCities);
+    void renderResult(String result);
+
+    void renderProvinceList(List<RowModel> strProvinces);
+
+    void renderCityFromList(List<RowModel> strCities);
+
+    void renderCityToList(List<RowModel> strCities);
 }

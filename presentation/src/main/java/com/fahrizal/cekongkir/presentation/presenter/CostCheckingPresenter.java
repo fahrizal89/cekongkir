@@ -171,20 +171,18 @@ public class CostCheckingPresenter implements Presenter {
     }
   }
   private void showProvinceCollectionInView(Collection<Province> provinceCollection) {
-    String[] strProvinces= new String[provinceCollection.size()];
     List<Province> provinces =  new ArrayList<>(provinceCollection);
-    for (int i = 0; i < provinces.size(); i++) {
-      strProvinces[i]= provinces.get(i).getName();
+    List<RowModel> rowModels = new ArrayList<>();
+    for (Province province:provinces) {
+      rowModels.add(new RowModel(province.getId(),province.getName()));
     }
     //render to view
-    this.viewListView.renderProvinceList(strProvinces);
+    this.viewListView.renderProvinceList(rowModels);
   }
-  public void searchCityFrom(int index){
-    String provinceId= (index+1)+"";
+  public void searchCityFrom(int provinceId){
     getCityListUseCase.execute(new CityFromListObserver(),new GetCityList.CityParam(provinceId));
   }
-  public void searchCityTo(int index){
-    String provinceId= (index+1)+"";
+  public void searchCityTo(int provinceId){
     getCityListUseCase.execute(new CityToListObserver(),new GetCityList.CityParam(provinceId));
   }
   private final class CityFromListObserver extends DefaultObserver<List<City>> {

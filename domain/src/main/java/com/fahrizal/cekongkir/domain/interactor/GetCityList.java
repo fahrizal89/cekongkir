@@ -11,6 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import lombok.Data;
 
 /**
  * This class is an implementation of {@link UseCase} that represents a use case for
@@ -31,18 +32,11 @@ public class GetCityList extends UseCase<List<City>, GetCityList.CityParam> {
   Observable<List<City>> buildUseCaseObservable(CityParam cityParam) {
     return this.cityRepository.getCityList(cityParam.getProvinceId());
   }
-
+  @Data
   public static final class CityParam {
-    private String provinceId;
+    private int provinceId;
 
-    public CityParam(String provinceId) {
-      this.provinceId = provinceId;
-    }
-
-    public String getProvinceId() {
-      return provinceId;
-    }
-    public void setProvinceId(String provinceId) {
+    public CityParam(int provinceId) {
       this.provinceId = provinceId;
     }
   }

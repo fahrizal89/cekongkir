@@ -36,7 +36,7 @@ public class CityDataRepository implements CityRepository {
     this.cityEntityDataMapper = cityEntityDataMapper;
   }
   @Override
-  public Observable<List<City>> getCityList(String provinceId) {
+  public Observable<List<City>> getCityList(int provinceId) {
     final CityDataStore provinceDataStore = this.cityDataStoreFactory.createCloudDataStore();
     return provinceDataStore.cityEntityList(provinceId).map(this.cityEntityDataMapper::transform);
   }

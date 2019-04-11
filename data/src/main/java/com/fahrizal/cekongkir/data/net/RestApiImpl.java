@@ -19,7 +19,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.fahrizal.cekongkir.data.entity.BaseResponse;
+import com.fahrizal.cekongkir.data.entity.ProvinceResponse;
 import com.fahrizal.cekongkir.data.entity.CityEntity;
 import com.fahrizal.cekongkir.data.entity.CityResponse;
 import com.fahrizal.cekongkir.data.entity.CostEntity;
@@ -83,7 +83,7 @@ public class RestApiImpl implements RestApi {
     return Observable.create(emitter -> {
       if (isThereInternetConnection()) {
         try {
-          BaseResponse response=apiService.getProvincesAll(RestApi.API_KEY).execute().body();
+          ProvinceResponse response=apiService.getProvincesAll(RestApi.API_KEY).execute().body();
           if (response != null) {
             emitter.onNext(response.getRajaOngkir().getResults());
             emitter.onComplete();
@@ -172,7 +172,6 @@ public class RestApiImpl implements RestApi {
       if (isThereInternetConnection()) {
         try {
           CityResponse response=apiService.getCities(RestApi.API_KEY,cityRequest.getProvinceId()).execute().body();
-//          CityResponse response=apiService.getCities(RestApi.API_KEY).execute().body();
           if (response != null) {
             List<CityEntity> cities= response.getRajaOngkir().getResults();
             emitter.onNext(cities);

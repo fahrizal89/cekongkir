@@ -1,27 +1,24 @@
 package com.fahrizal.cekongkir.domain;
 
+import lombok.Data;
+
 /**
  * Class that represents a Province in the domain layer.
  */
+@Data
 public class Province {
 
-  private final int id;
-  private String name;
+    private final int id;
 
-  public Province(int id, String name) {
-    this.id = id;
-    this.name = name;
-  }
+    private String name;
 
-  public int getId() {
-    return id;
-  }
+    public Province(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
+    @Override
+    public String toString() {
+        return name;
+    }
 }

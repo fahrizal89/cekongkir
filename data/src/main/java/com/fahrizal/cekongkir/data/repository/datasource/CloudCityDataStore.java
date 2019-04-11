@@ -28,7 +28,7 @@ class CloudCityDataStore implements CityDataStore {
     this.cityCache = cityCache;
   }
   @Override
-  public Observable<List<CityEntity>> cityEntityList(String provinceId) {
+  public Observable<List<CityEntity>> cityEntityList(int provinceId) {
     CityRequest cityRequest = new CityRequest();
     cityRequest.setProvinceId(provinceId);
     return this.restApi.cityEntityList(cityRequest);

@@ -14,5 +14,5 @@ public interface CityRepository {
   /**
    * Get an {@link Observable} which will emit a List of {@link City}.
    */
-  Observable<List<City>> getCityList(final String provinceId);
+  Observable<List<City>> getCityList(final int provinceId);
 }

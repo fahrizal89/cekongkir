@@ -13,6 +13,6 @@ public interface CityDataStore {
   /**
    * Get an {@link Observable} which will emit a List of {@link CityEntity}.
    */
-  Observable<List<CityEntity>> cityEntityList(String provinceId);
+  Observable<List<CityEntity>> cityEntityList(int provinceId);
 
 }
